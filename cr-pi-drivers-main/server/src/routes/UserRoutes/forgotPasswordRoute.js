@@ -12,7 +12,7 @@ router.put("/recover", async (req, res) => {
     if (error.message === "Incorrect answers") {
       res.status(400).json({ error: error.message });
     } else if(error.message === "Email doesn't exist"){
-      res.status(400).json({error: error.message})
+      res.status(404).json({error: error.message})
     }else if(error.message === "Incomplete data provided"){
       res.status(404).json({error: error.message})
     }
