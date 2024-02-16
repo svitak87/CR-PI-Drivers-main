@@ -25,13 +25,13 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING, 
       allowNull: false,
-      defaultValue: path.join(__dirname, "../assets/defaultImage.png") // Ruta absoluta de la imagen por defecto
+      defaultValue: path.join(__dirname, "../assets/defaultImage.png")
     },
     nationality: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dob: { //fecha de nacimiento
+    dob: { 
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
