@@ -3,7 +3,7 @@ const { Driver, Team } = require("../db");
 const getAllDrivers = async () => {
   try {
     const allDrivers = await Driver.findAll({
-      attributes: ['image', 'name', 'lastName'], 
+      attributes: ['image', 'name', 'lastname'], 
       include: [
         {
           model: Team,

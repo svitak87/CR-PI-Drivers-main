@@ -2,10 +2,10 @@ const { Driver, Team } = require("../db");
 const path = require("path");
 
 const createDriver = async (driverData) => {
-  const { name, lastName, description, image, nationality, dob, TeamName } = driverData;
+  const { name, lastname, description, image, nationality, dob, TeamName } = driverData;
 
   try {
-    if (!name || !lastName || !description || !nationality || !dob || !TeamName) {
+    if (!name || !lastname || !description || !nationality || !dob || !TeamName) {
       throw new Error("Incomplete data");
     } else {
       if (!image) {

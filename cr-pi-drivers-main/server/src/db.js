@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
+// const UserModel = require('../src/models/User');
 
 
 const fs = require('fs');
@@ -7,6 +8,14 @@ const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
+
+
+// const { DB_USER, DB_PASSWORD, DB_HOST, USER, PASSWORD, HOST, PORT_DB, BDD } = process.env;
+
+// const userdatabase = new Sequelize( // users database
+//   `postgres://${USER}:${PASSWORD}@${HOST}:${PORT_DB}/${BDD}`,
+//   { logging: false }
+// );
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/drivers`, {
   logging: false, 
@@ -30,12 +39,18 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-const { Driver, Team } = sequelize.models;
+const { Driver, Team, User } = sequelize.models;
 
 Driver.belongsToMany(Team, {through: "driver_team"});
 Team.belongsToMany(Driver, {through: "driver_team"});
 
-module.exports = {
-  ...sequelize.models, 
-  conn: sequelize,     
-};
+// UserModel(userdatabase); //userdatabase
+// const {User} = userdatabase.models //userdatabase
+
+// module.exports = {
+//   ...sequelize.models, 
+//   conn: sequelize,
+// };
+
+module.exports =  {sequelize,
+...sequelize.models} 

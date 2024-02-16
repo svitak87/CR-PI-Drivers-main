@@ -3,13 +3,13 @@ const router = express.Router();
 const createDriver = require('../controllers/createDriver');
 
 router.post("/drivers", async (req, res) => {
-  const { name, lastName, description, image, nationality, dob, TeamName} =
+  const { name, lastname, description, image, nationality, dob, TeamName} =
     req.body;
 
   try {
     const createdDriver = await createDriver({
       name,
-      lastName,
+      lastname,
       description,
       image,
       nationality,
@@ -26,3 +26,13 @@ router.post("/drivers", async (req, res) => {
   }
 });
 module.exports = router;
+
+// {
+//   "name": "Geoff",
+//   "lastname": "Rowley",
+//   "description": "Piloto de carreras internacional",
+//   "image": "",
+//   "nationality": "British",
+//   "dob": "1985-06-15",
+//   "TeamName": "Ferrari"
+// }

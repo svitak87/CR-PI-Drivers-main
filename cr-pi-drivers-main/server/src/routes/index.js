@@ -14,4 +14,14 @@ router.use(createDriverRoute);
 router.use(getDriverDetailRoute);
 router.use('/query', getDriversQuery);
 
+//Users routes:
+
+const registerUserRoute = require('../routes/UserRoutes/registerUserRoute');
+const usersLoginRoute = require('../routes/UserRoutes/loginUserRoute');
+const forgotPasswordRoute = require('../routes/UserRoutes/forgotPasswordRoute');
+
+router.use("/users", registerUserRoute);
+router.use("/users", usersLoginRoute);
+router.use("/users", forgotPasswordRoute);
+
 module.exports = router;
