@@ -1,4 +1,5 @@
 const { Driver, Team } = require("../db");
+const path = require("path");
 
 const createDriver = async (driverData) => {
   const { name, lastName, description, image, nationality, dob, TeamName } = driverData;
@@ -8,7 +9,7 @@ const createDriver = async (driverData) => {
       throw new Error("Incomplete data");
     } else {
       if (!image) {
-        driverData.image = "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg";
+        driverData.image = path.join(__dirname, "../assets/defaultImage.png");
       }
 
       const driverCreated = await Driver.create(driverData);

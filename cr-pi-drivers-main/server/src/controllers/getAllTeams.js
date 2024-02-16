@@ -3,30 +3,38 @@ const api = require("../../api/db.json");
 
 const getAllTeams = async () => {
   try {
-    const drivers = api.drivers;
-    const teamsArray = [];
+    // Verificar si la tabla de equipos está vacía en la base de datos
+    const teamsCount = await Team.count();
 
-    for (const driver of drivers) {
-      if (driver.teams !== undefined) {
-        const teams = driver.teams.split(",");
+    if (teamsCount === 0) {
+      // La tabla de equipos está vacía, así que guardamos todos los equipos de la API local en la base de datos
+      for (const driver of api.drivers) {
+        if (driver.teams !== undefined) {
+          const teams = driver.teams.split(",");
 
-        for (const teamName of teams) {
-          const name = teamName.trim();
+          for (const teamName of teams) {
+            const name = teamName.trim();
 
-          const existingTeam = await Team.findOne({ where: { name } });
+            // Verificar si el equipo ya existe en la base de datos
+            const existingTeam = await Team.findOne({ where: { name } });
 
-          if (!existingTeam) {
-            const newTeam = await Team.create({ name });
-            teamsArray.push(newTeam);
+            // Si el equipo no existe, créalo y agrégalo a la base de datos
+            if (!existingTeam) {
+              await Team.create({ name });
+            }
           }
         }
       }
     }
 
-    return teamsArray;
+    // Después de asegurarnos de que los equipos estén en la base de datos, los recuperamos y los devolvemos
+    const teams = await Team.findAll();
+    return teams;
   } catch (error) {
     throw error;
   }
 };
 
 module.exports = getAllTeams;
+
+40113570 

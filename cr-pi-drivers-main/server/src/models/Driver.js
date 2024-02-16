@@ -1,4 +1,6 @@
 const { DataTypes } = require("sequelize");
+const path = require("path");
+
 
 module.exports = (sequelize) => {
   // defino el modelo
@@ -21,9 +23,9 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING, // Tipo de dato STRING para almacenar URLs de imágenes
+      type: DataTypes.STRING, 
       allowNull: false,
-      defaultValue: "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+      defaultValue: path.join(__dirname, "../assets/defaultImage.png") // Ruta absoluta de la imagen por defecto
     },
     nationality: {
       type: DataTypes.STRING,

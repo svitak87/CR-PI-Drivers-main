@@ -11,9 +11,12 @@ const getAllDrivers = async () => {
           through: { attributes: [] } 
         }
       ]
-    });
-
-    return allDrivers;
+    })
+    if(allDrivers.length !== 0){
+      return allDrivers;
+    }else{
+      throw new Error("There are no drivers");
+    }
   } catch (error) {
     throw error;
   }
