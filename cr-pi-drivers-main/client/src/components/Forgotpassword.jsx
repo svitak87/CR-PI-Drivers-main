@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { recoverPassword } from "../redux/actions";
 
 const Forgotpassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
   const [updateRecover, setUpdateRecover] = useState("");
   const [userCredentials, setUserCredentials] = useState({
     email: "",
@@ -14,6 +13,8 @@ const Forgotpassword = () => {
     answerOne: "",
     answerTwo: "",
   });
+  const users = useSelector((state) => state.users);
+  console.log(users)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,20 +25,18 @@ const Forgotpassword = () => {
     event.preventDefault();
 
     const { email, answerOne, answerTwo, newpassword } = userCredentials;
-    if (userCredentials.email === email && userCredentials.answerOne === answerOne &&userCredentials.answerTwo === answerTwo) {
-        if(newpassword){
-            await dispatch(recoverPassword(userCredentials))
-        .then(() => {
-          setAccess(true);
+
+    if (currentUser && currentUser.answerOne === answerOne && currentUser.answerTwo === answerTwo) {
+      if (newpassword) {
+        try {
+          await dispatch(recoverPassword(userCredentials));
+          setUpdateRecover("");
           navigate("/login");
-        })
-        .catch((error) => {
-          if (error.message === "Incorrect answers") {
-            setAccess(false);
-            setUpdateRecover("Incorrect answers");
+        } catch (error) {
+          if (error.message === "Incorrect credentials, verify your answers") {
+            setUpdateRecover("Incorrect credentials, verify your answers");
             setTimeout(() => {
               setUserCredentials({
-                ...userCredentials,
                 email: "",
                 newpassword: "",
                 answerOne: "",
@@ -48,10 +47,11 @@ const Forgotpassword = () => {
               setUpdateRecover("");
             }, 4000);
           }
-        });
+        }
+      }
     }
-}
   };
+
   return (
     <div>
       <h2>Please enter your email:</h2>
@@ -65,7 +65,7 @@ const Forgotpassword = () => {
           autoComplete="off"
           required
         />
-        <h2>What's your firts father name?</h2>
+        <h2>What's your first father's name?</h2>
         <input
           type="text"
           name="answerOne"
@@ -76,9 +76,7 @@ const Forgotpassword = () => {
           required
         />
         <h2>What's your birth date?</h2>
-        <p>
-          If your birth date is 02/feb/1990, the answer must be like: "02021990"
-        </p>
+        <p>If your birth date is 02/feb/1990, the answer must be like: "02021990"</p>
         <input
           type="text"
           name="answerTwo"
@@ -88,13 +86,13 @@ const Forgotpassword = () => {
           autoComplete="off"
           required
         />
-         <div>
-          <label htmlFor="password">New password:</label>
+        <div>
+          <label htmlFor="newpassword">New password:</label>
           <input
             type="password"
-            name="password"
-            id="password"
-            value={userCredentials.password}
+            name="newpassword"
+            id="newpassword"
+            value={userCredentials.newpassword}
             onChange={handleChange}
             autoComplete="off"
             required

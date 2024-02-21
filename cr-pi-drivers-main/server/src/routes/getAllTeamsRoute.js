@@ -7,7 +7,9 @@ router.get("/teams", async (req, res) => {
     const allTeams = await getAllTeams(); 
     res.status(200).json(allTeams);
   } catch (error) {
-    console.error("Error getting teams:", error);
+    if(error.message === "There are no teams for a while"){
+      res.status(400).json({error: error.message})
+    }
     res.status(500).json({ error: "Internal server error" });
   }
 });

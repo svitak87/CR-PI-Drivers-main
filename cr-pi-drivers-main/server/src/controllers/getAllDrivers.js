@@ -2,8 +2,9 @@ const { Driver, Team } = require("../db");
 
 const getAllDrivers = async () => {
   try {
+    // Realiza la consulta cada vez que se llama la función
     const allDrivers = await Driver.findAll({
-      attributes: ['image', 'name', 'lastname'], 
+      attributes: ['id', 'image', 'name', 'lastname'], 
       include: [
         {
           model: Team,
@@ -11,15 +12,13 @@ const getAllDrivers = async () => {
           through: { attributes: [] } 
         }
       ]
-    })
-    if(allDrivers.length !== 0){
-      return allDrivers;
-    }else{
-      throw new Error("There are no drivers");
-    }
+    });
+    
+    return allDrivers;
   } catch (error) {
     throw error;
   }
 }
 
 module.exports = getAllDrivers;
+

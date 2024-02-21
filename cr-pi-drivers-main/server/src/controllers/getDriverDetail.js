@@ -10,7 +10,8 @@ const getDriverDetail = async (id) => {
     if (driverApiFound) {
       return {
         id: driverApiFound.id,
-        name: `${driverApiFound.name.forename} ${driverApiFound.name.surname}`,
+        name: `${driverApiFound.name.forename}`,
+        lastname: `${driverApiFound.name.surname}`,
         nationality: driverApiFound.nationality,
         image: driverApiFound.image.url,
         description: driverApiFound.description,

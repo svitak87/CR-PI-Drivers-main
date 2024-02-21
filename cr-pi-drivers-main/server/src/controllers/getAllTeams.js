@@ -22,6 +22,9 @@ const getAllTeams = async () => {
       }
     }
     const teams = await Team.findAll();
+    if(teams.length === 0){
+      throw new Error("There are no teams for a while");
+    }
     return teams;
   } catch (error) {
     throw error;

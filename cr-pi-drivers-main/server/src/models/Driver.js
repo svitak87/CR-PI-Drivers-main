@@ -1,9 +1,6 @@
 const { DataTypes } = require("sequelize");
-const path = require("path");
-
 
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define("Driver", {
     id: {
       type: DataTypes.UUID,
@@ -24,8 +21,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING, 
-      allowNull: false,
-      defaultValue: path.join(__dirname, "../assets/defaultImage.png")
+      defaultValue: "http://localhost:3001/assets/DefaultDriver.png"
     },
     nationality: {
       type: DataTypes.STRING,
