@@ -19,9 +19,13 @@ const Form = () => {
     TeamName: [],
   });
 
-  useEffect(() => {
-    dispatch(getAllTeams());
-  }, [dispatch]);
+  const disbleButton =
+    !driverData.name ||
+    !driverData.lastname ||
+    !driverData.description ||
+    !driverData.nationality ||
+    !driverData.dob ||
+    !driverData.TeamName;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,26 +34,31 @@ const Form = () => {
       [name]: value,
     }));
   };
-  const handleTeamsChange = (event) => {
-    const { value } = event.target;
-    setDriverData((prevState) => ({
-      ...prevState,
-      TeamName: value, // Asigna solo el valor seleccionado, no un array de valores
-    }));
-  };
   // const handleTeamsChange = (event) => {
-  //   const { options } = event.target;
-  //   const selectedTeams = Array.from(options)
-  //     .filter(option => option.selected)
-  //     .map(option => option.value);
-  
-  //   setDriverData(prevState => ({
+  //   const { value } = event.target;
+  //   setDriverData((prevState) => ({
   //     ...prevState,
-  //     TeamName: selectedTeams,
+  //     TeamName: value, // Asigna solo el valor seleccionado, no un array de valores
   //   }));
   // };
-  
 
+  const handleTeamsChange = (event) => {
+    const { options } = event.target;
+    const selectedTeamNames = Array.from(options)
+      .filter(option => option.selected)
+      .map(option => option.value);
+  
+    setDriverData(prevState => ({
+      ...prevState,
+      TeamName: [...prevState.TeamName, ...selectedTeamNames],
+    }));
+  
+    console.log(selectedTeamNames);
+  };
+  
+  
+  
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -73,12 +82,26 @@ const Form = () => {
       } else {
         // Si no hay error, se creó el conductor correctamente
         setCreated(true);
-        navigate("/home");
+        setErrorCreation("The driver was created succesfully");
+        setTimeout(() => {
+          setDriverData({
+            name: "",
+            lastname: "",
+            description: "",
+            image: "",
+            nationality: "",
+            dob: "",
+          });
+          navigate("/home");
+        }, 4000);
       }
     } catch (error) {
       console.error("Error creating driver:", error);
     }
   };
+  useEffect(() => {
+    dispatch(getAllTeams());
+  }, [dispatch]);
 
   return (
     <div>
@@ -151,8 +174,8 @@ const Form = () => {
             name="teams"
             value={driverData.TeamName}
             onChange={handleTeamsChange}
+            disabled={disbleButton}    
           >
-            {/* Mapear las opciones de los equipos obtenidos del estado global */}
             {teams.map((team, index) => (
               <option key={index} value={team.name}>
                 {team.name}
@@ -160,7 +183,9 @@ const Form = () => {
             ))}
           </select>
         </div>
-        <button type="submit">Create Driver</button>
+        <button type="submit" disabled={disbleButton}>
+          Create Driver
+        </button>
       </form>
       {errorCreation && <p>{errorCreation}</p>}
       <Link to="/home">
@@ -170,4 +195,18 @@ const Form = () => {
   );
 };
 
+
+
 export default Form;
+
+  // const handleTeamsChange = (event) => {
+  //   const { options } = event.target;
+  //   const selectedTeams = Array.from(options)
+  //     .filter(option => option.selected)
+  //     .map(option => option.value);
+
+  //   setDriverData(prevState => ({
+  //     ...prevState,
+  //     TeamName: selectedTeams,
+  //   }));
+  // };

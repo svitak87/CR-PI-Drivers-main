@@ -6,6 +6,8 @@ export const FIND_BY_NAME = "FIND_BY_NAME";
 export const GET_DRIVER_DETAIL = "GET_DRIVER_DETAIL";
 export const CREATE_DRIVER = "CREATE_DRIVER";
 export const GET_ALL_TEAMS = "GET_ALL_TEAMS";
+export const NEXT_PAGE = "NEXT_PAGE";
+export const PREVIOUS_PAGE = "PREVIOUS_PAGE";
 
 import axios from "axios";
 
@@ -88,7 +90,6 @@ export const getAllDrivers = () => {
         }),
         axios.get("http://localhost:5000/drivers"),
       ]);
-
       const combineInfo = {
         dataFromDb: dataFromDb,
         dataFromApi: dataFromApi,
@@ -100,25 +101,50 @@ export const getAllDrivers = () => {
     }
   };
 };
-
 export const findByName = (query) => {
   return async function (dispatch) {
     try {
-      const response = await axios
-        .get(`http://localhost:3001/query/drivers/name?name=${query}`)
-        .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            return { error: error.response };
-          }
-          throw error;
-        });
-      dispatch({ type: FIND_BY_NAME, payload: response.data });
-      return response;
+      const queryFromApiPromise = axios.get(`http://localhost:3001/query/api/name?name=${query}`);
+      const queryFromDbPromise = axios.get(`http://localhost:3001/query/database/name?name=${query}`);
+
+      const [queryFromApi, queryFromDb] = await Promise.all([queryFromApiPromise, queryFromDbPromise]);
+
+      const combineInfo = {
+        dataFromDb: queryFromDb.data, 
+        dataFromApi: queryFromApi.data, 
+      };
+
+      dispatch({ type: FIND_BY_NAME, payload: combineInfo });
+      console.log(combineInfo)
+      return combineInfo;
     } catch (error) {
+      console.error("Error fetching data:", error);
       throw error;
     }
   };
 };
+
+
+
+// export const findByName = (query) => {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios
+//         .get(`http://localhost:3001/query/drivers/name?name=${query}`)
+//         .catch((error) => {
+//           if (error.response && error.response.status === 404) {
+//             return { error: error.response };
+//           }
+//           throw error;
+//         });
+//       dispatch({ type: FIND_BY_NAME, payload: response.data });
+//       console.log(response.data)
+//       return response;
+//     } catch (error) {
+//       throw error;
+//     }
+//   };
+// };
 
 export const getDriverDetail = (id) => {
   return async function (dispatch) {
@@ -173,4 +199,18 @@ export const getAllTeams = () => {
     }
   };
 };
+
+export const nextPage = (currentPage) => {
+  return (dispatch) => {
+    const nextpage = currentPage + 1
+    dispatch({ type: NEXT_PAGE, payload: nextpage });
+  }
+}
+
+export const previousPage = (currentPage) => {
+  return (dispatch) => {
+    const previouspage = currentPage - 1
+    dispatch({ type: PREVIOUS_PAGE, payload: previouspage });
+  }
+}
 

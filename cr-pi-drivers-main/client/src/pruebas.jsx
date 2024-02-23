@@ -5,17 +5,17 @@ import { useSelector, useDispatch } from "react-redux";
 const Home = () => {
   // const drivers = useSelector((state) => state.drivers);
   const dispatch = useDispatch();
-  // const [query, setQuery] = useState("")
+  const [query, setQuery] = useState("")
   // const [id, setId] = useState("")
-  const [driverData, setDriverData] = useState({
-    name: "",
-    lastname: "",
-    description: "",
-    image: "",
-    nationality: "",
-    dob: "",
-    TeamName: ""
-  })
+  // const [driverData, setDriverData] = useState({
+  //   name: "",
+  //   lastname: "",
+  //   description: "",
+  //   image: "",
+  //   nationality: "",
+  //   dob: "",
+  //   TeamName: ""
+  // })
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -43,18 +43,18 @@ const Home = () => {
   };
   
 
-  // const submitForm = (event) => {
-  //   event.preventDefault();
-  //   const obtainDriver = async () => {
-  //     try {
-  //       const driver = await dispatch(findByName(query));
-  //       console.log(driver);
-  //     } catch (error) {
-  //       console.error("Error fetching driver:", error);
-  //     }
-  //   };
-  //   obtainDriver();
-  // };
+  const submitForm = (event) => {
+    event.preventDefault();
+    const obtainDriver = async () => {
+      try {
+        const driver = await dispatch(findByName(query));
+        console.log(driver);
+      } catch (error) {
+        console.error("Error fetching driver:", error);
+      }
+    };
+    obtainDriver();
+  };
 
   // const submitForm = (event) => {
   //   event.preventDefault();
@@ -68,33 +68,33 @@ const Home = () => {
   //   }
   //   driverDetail();
   // }
-  const submitForm = (event) => {
-    event.preventDefault();
-    const creationDriver = async () => {
-      try {
-        const newDriver = await dispatch(createDriver(driverData));
-        console.log(newDriver)
-      } catch (error) {
-        console.error("Error fetching driver:", error);
-      }
-    }
-    creationDriver();
-  }
+  // const submitForm = (event) => {
+  //   event.preventDefault();
+  //   const creationDriver = async () => {
+  //     try {
+  //       const newDriver = await dispatch(createDriver(driverData));
+  //       console.log(newDriver)
+  //     } catch (error) {
+  //       console.error("Error fetching driver:", error);
+  //     }
+  //   }
+  //   creationDriver();
+  // }
 
 
   return (
     <div>
       <h1>Ventana de bienvenida</h1>
       <form onSubmit={submitForm}>
-      <input type="text" name="name" value={driverData.name} onChange={handleChange} />
-      <input type="text" name="lastname" value={driverData.lastname} onChange={handleChange} />
+      <input type="text" name="name" value={query} onChange={handleChange} />
+      {/* <input type="text" name="lastname" value={driverData.lastname} onChange={handleChange} />
       <input type="text" name="description" value={driverData.description} onChange={handleChange} />
       <input type="text" name="image" value={driverData.image} onChange={handleChange} />
       <input type="text" name="nationality" value={driverData.nationality} onChange={handleChange} />
       <input type="text" name="dob" value={driverData.dob} onChange={handleChange} />
-      <input type="text" name="TeamName" value={driverData.TeamName} onChange={handleChange} />
+      <input type="text" name="TeamName" value={driverData.TeamName} onChange={handleChange} /> */}
 
-        <button>Agregar</button>
+        <button>buscar</button>
       </form>
     </div>
   );

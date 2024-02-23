@@ -15,7 +15,6 @@ const Navbar = ({onSearch}) => {
 
   const submitForm = async (event) => {
     event.preventDefault();
-    console.log(query)
     onSearch(query); 
   };
 
@@ -38,9 +37,11 @@ const Navbar = ({onSearch}) => {
                   <p className={styles.createLink}>Create</p>
                 </li>
                 </Link>
+                <Link>
                 <li>
                   <p className={styles.homeLink}>Home</p>
                 </li>
+                </Link>
               </ul>
             </nav>
           </div>
