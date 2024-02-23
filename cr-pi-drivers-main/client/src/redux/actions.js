@@ -44,8 +44,10 @@ export const userLogin = (credentialData) => {
         },
         body: JSON.stringify(credentialData),
       });
-      if (response.status === 403) {
-        throw Error("Incorrect credentials");
+      if (response.status === 404) {
+        throw Error("Email doesn't exist");
+      }else if(response.status === 403){
+        throw Error("Password doesn't match")
       }
       const data = await response.json();
       dispatch({ type: USER_LOGIN, payload: data });
@@ -74,7 +76,9 @@ export const recoverPassword = (userCredentials) => {
       }
       const data = await response.json();
       dispatch({ type: FORGOT_PASSWORD, payload: data });
-    } catch (error) {}
+    } catch (error) {
+      throw error
+    }
   };
 };
 
@@ -101,50 +105,38 @@ export const getAllDrivers = () => {
     }
   };
 };
+
 export const findByName = (query) => {
   return async function (dispatch) {
     try {
-      const queryFromApiPromise = axios.get(`http://localhost:3001/query/api/name?name=${query}`);
-      const queryFromDbPromise = axios.get(`http://localhost:3001/query/database/name?name=${query}`);
-
-      const [queryFromApi, queryFromDb] = await Promise.all([queryFromApiPromise, queryFromDbPromise]);
-
+      const queryFromApiResponse = await axios.get(`http://localhost:3001/query/api/name?name=${query}`);
+      let queryFromDbResponse;
+      try {
+        queryFromDbResponse = await axios.get(`http://localhost:3001/query/database/name?name=${query}`);
+      } catch (Error) {
+        
+        if (Error.response && Error.response.status === 404) {
+          queryFromDbResponse = { data: [] }; 
+        } else {
+          throw Error; 
+        }
+      }
+      
       const combineInfo = {
-        dataFromDb: queryFromDb.data, 
-        dataFromApi: queryFromApi.data, 
+        dataFromDb: queryFromDbResponse.data,
+        dataFromApi: queryFromApiResponse.data,
       };
-
       dispatch({ type: FIND_BY_NAME, payload: combineInfo });
-      console.log(combineInfo)
       return combineInfo;
+
     } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
+      if(error.response && error.response.status === 404){
+        throw Error("There are no drivers with that query")
+      }
     }
   };
 };
 
-
-
-// export const findByName = (query) => {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios
-//         .get(`http://localhost:3001/query/drivers/name?name=${query}`)
-//         .catch((error) => {
-//           if (error.response && error.response.status === 404) {
-//             return { error: error.response };
-//           }
-//           throw error;
-//         });
-//       dispatch({ type: FIND_BY_NAME, payload: response.data });
-//       console.log(response.data)
-//       return response;
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
-// };
 
 export const getDriverDetail = (id) => {
   return async function (dispatch) {
@@ -189,7 +181,7 @@ export const getAllTeams = () => {
     try {
       const response = await axios
       .get(`http://localhost:3001/teams`);
-      console.log(response); // Mueve esta línea aquí
+     
       dispatch({ type: GET_ALL_TEAMS, payload: response.data });
     } catch (error) {
       if (error.message && error.response.status === 400) {

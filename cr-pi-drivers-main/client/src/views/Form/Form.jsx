@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createDriver, getAllTeams } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -19,14 +20,6 @@ const Form = () => {
     TeamName: [],
   });
 
-  const disbleButton =
-    !driverData.name ||
-    !driverData.lastname ||
-    !driverData.description ||
-    !driverData.nationality ||
-    !driverData.dob ||
-    !driverData.TeamName;
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setDriverData((prevState) => ({
@@ -34,38 +27,28 @@ const Form = () => {
       [name]: value,
     }));
   };
-  // const handleTeamsChange = (event) => {
-  //   const { value } = event.target;
-  //   setDriverData((prevState) => ({
-  //     ...prevState,
-  //     TeamName: value, // Asigna solo el valor seleccionado, no un array de valores
-  //   }));
-  // };
 
   const handleTeamsChange = (event) => {
     const { options } = event.target;
-    const selectedTeamNames = Array.from(options)
-      .filter(option => option.selected)
-      .map(option => option.value);
-  
-    setDriverData(prevState => ({
+    let selectedTeams = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedTeams.push(options[i].value);
+      }
+    }
+    setDriverData((prevState) => ({
       ...prevState,
-      TeamName: [...prevState.TeamName, ...selectedTeamNames],
+      TeamName: [...selectedTeams],
     }));
-  
-    console.log(selectedTeamNames);
+    console.log(selectedTeams);
   };
-  
-  
-  
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await dispatch(createDriver(driverData));
       if (response.error) {
-        // Si hay un error en la respuesta, establece el estado de error
         setCreated(false);
         setErrorCreation("Incomplete data");
         setTimeout(() => {
@@ -80,7 +63,6 @@ const Form = () => {
           });
         }, 4000);
       } else {
-        // Si no hay error, se creó el conductor correctamente
         setCreated(true);
         setErrorCreation("The driver was created succesfully");
         setTimeout(() => {
@@ -103,8 +85,20 @@ const Form = () => {
     dispatch(getAllTeams());
   }, [dispatch]);
 
+  const disebleButton = () => {
+    return (
+      !driverData.TeamName ||
+      !driverData.name ||
+      !driverData.lastname ||
+      !driverData.description ||
+      !driverData.nationality ||
+      !driverData.dob
+    );
+  };
+
   return (
     <div>
+      <Navbar />
       <h2>Create your personal driver:</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -174,7 +168,6 @@ const Form = () => {
             name="teams"
             value={driverData.TeamName}
             onChange={handleTeamsChange}
-            disabled={disbleButton}    
           >
             {teams.map((team, index) => (
               <option key={index} value={team.name}>
@@ -183,7 +176,7 @@ const Form = () => {
             ))}
           </select>
         </div>
-        <button type="submit" disabled={disbleButton}>
+        <button type="submit" disabled={disebleButton()}>
           Create Driver
         </button>
       </form>
@@ -195,18 +188,5 @@ const Form = () => {
   );
 };
 
-
-
 export default Form;
 
-  // const handleTeamsChange = (event) => {
-  //   const { options } = event.target;
-  //   const selectedTeams = Array.from(options)
-  //     .filter(option => option.selected)
-  //     .map(option => option.value);
-
-  //   setDriverData(prevState => ({
-  //     ...prevState,
-  //     TeamName: selectedTeams,
-  //   }));
-  // };

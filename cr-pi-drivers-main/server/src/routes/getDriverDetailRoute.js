@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const getDriverDetail = require("../controllers/getDriverDetail");
 
-
-
 router.get("/drivers/:id", async (req, res) => {
   const { id } = req.params;
 

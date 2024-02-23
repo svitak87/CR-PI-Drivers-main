@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* Distribuye las tarjetas uniformemente */
+    justify-content: space-between; 
     margin-top: 100px;
     margin-right: 100px;
   }

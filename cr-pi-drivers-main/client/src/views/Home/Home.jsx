@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getAllDrivers,
@@ -9,7 +9,7 @@ import {
 import Navbar from "../../components/Navbar";
 import Card from "../../components/Card";
 import style from "../Home/Home.module.css";
-import { Link } from "react-router-dom";
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,10 +19,7 @@ const Home = () => {
   const driversPerPage = useSelector((state) => state.driversPerPage);
   const queryApi = useSelector((state) => state.queryDriversApi);
   const queryDb = useSelector((state) => state.queryDriversDb);
-
-  console.log(queryDb)
-  console.log(queryApi)
-
+  const [noDriver, setNoDriver] = useState("")
 
   useEffect(() => {
     dispatch(getAllDrivers());
@@ -31,9 +28,15 @@ const Home = () => {
   const handleSearch = (query) => {
     const obtainDriver = async () => {
       try {
-        const driver = await dispatch(findByName(query));
+        await dispatch(findByName(query));
       } catch (error) {
-        console.error("Error fetching driver:", error);
+        if(error.message === "There are no drivers with that query"){
+          setNoDriver("There are no drivers with that query")
+          setTimeout(() => {
+            setNoDriver("")
+          }, 4000);
+          throw {error: error.message}
+        }
       }
     };
     obtainDriver();
@@ -56,7 +59,7 @@ const Home = () => {
       id={driver.id}
       image={driver.image}
       dbName={{ name: driver.name, lastname: driver.lastname }}
-      teams={driver.Teams ? driver.Teams.map((team) => team.name).join(", ") : ""} // Verificar si driver.Teams existe antes de mapear
+      teams={driver.Teams ? driver.Teams.map((team) => team.name).join(", ") : undefined} 
       source="db"
     />
   ));
@@ -98,11 +101,21 @@ const Home = () => {
   const handlePreviousPage = () => {
     dispatch(previousPage(currentPage));
   };
-
+    const refresh = async () => {
+      try {
+       await dispatch(getAllDrivers())
+      } catch (error) {
+        throw error;
+      }
+    }
+    
   return (
     <div>
       <Navbar onSearch={handleSearch} />
       <div>
+        <form onSubmit={refresh}>
+        <button type="submit">Get all drivers</button>
+        </form>
       </div>
       <div className={style.containerButtons}>
         <button
@@ -121,6 +134,9 @@ const Home = () => {
         >
           Next
         </button>
+      </div>
+      <div>
+        {noDriver && <h1>{noDriver}</h1>}
       </div>
       <div className={style.cardsContainer}>
         <div className={style.container}>

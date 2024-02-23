@@ -24,7 +24,7 @@
 }
 
 .image {
-    width: 300px; /* Cambiar a 100% */
+    width: 300px; 
     height: 300px;
     margin-top: 25px;
     object-fit: cover; 
@@ -34,16 +34,16 @@
     font-size: 18px;
     text-decoration: none;
     color: #000;
-    margin: 0 auto; /* Margen automático para centrar el nombre */
-    text-align: left; /* Alinea el texto a la izquierda */
-    padding: 0 10px; /* Agrega un poco de espacio entre el nombre y los bordes de la tarjeta */
-    font-weight: bold; /* Aplica negrita al nombre */
+    margin: 0 auto; 
+    text-align: left; 
+    padding: 0 10px; 
+    font-weight: bold; 
 }
 
 .teams {
-    font-size: 15px; /* Tamaño de fuente para los equipos */
-    color: #000; /* Color del texto de los equipos */
-    margin: 0 auto; /* Ajusta el margen para separar los equipos */
+    font-size: 15px; 
+    color: #000; 
+    margin: 0 auto; 
     margin-right: 40px;
     margin-left: 10px;
     margin-top: 0%;

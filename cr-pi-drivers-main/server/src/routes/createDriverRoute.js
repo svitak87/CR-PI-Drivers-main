@@ -27,12 +27,3 @@ router.post("/drivers", async (req, res) => {
 });
 module.exports = router;
 
-// {
-//   "name": "Geoff",
-//   "lastname": "Rowley",
-//   "description": "Piloto de carreras internacional",
-//   "image": "",
-//   "nationality": "British",
-//   "dob": "1985-06-15",
-//   "TeamName": "Ferrari"
-// }

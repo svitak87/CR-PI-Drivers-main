@@ -1,23 +1,3 @@
-// const express = require("express");
-// const router = express.Router();
-// const getDriversQuery = require('../controllers/getDriversQuery')
-
-// router.get("/drivers/name", async (req, res) => {
-//     try {
-//         const { name } = req.query;
-//         const driversFound = await getDriversQuery(name);
-//         res.status(200).json(driversFound)
-//     } catch (error) {
-//         if(error.message === "There are no drivers with that query"){
-//             res.status(404).json({error: error.message})
-//         }else{
-//             res.status(500).json({error: "Internal server error"})
-//         }
-//     }
-// });
-
-// module.exports = router;
-
 const express = require("express");
 const router = express.Router();
 const {

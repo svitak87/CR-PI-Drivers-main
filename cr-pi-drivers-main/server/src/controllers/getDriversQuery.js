@@ -11,7 +11,12 @@ const searchInApi = (query) => {
       return fullName.includes(lowercaseQuery);
     })
     .slice(0, 15);
-  return queryApi;
+  
+  if (queryApi.length === 0) { 
+    throw new Error("There are no drivers with that query");
+  } else {
+    return queryApi;
+  }
 };
 
 const searchInDatabase = async (query) => {
@@ -33,7 +38,12 @@ const searchInDatabase = async (query) => {
     },
     limit: 15,
   });
-  return queryDb;
+  
+  if (!queryDb || queryDb.length === 0) { 
+    throw new Error("There are no drivers with that query");
+  } else {
+    return queryDb;
+  }
 };
 
 module.exports = {

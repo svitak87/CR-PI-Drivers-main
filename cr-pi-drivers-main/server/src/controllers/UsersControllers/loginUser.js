@@ -14,7 +14,7 @@ const loginUser = async (credentialData) => {
           throw new Error("Password doesn't match");
         }
       } else {
-        throw new Error("Email doesn't match");
+        throw new Error("Email doesn't exist");
       }
     } else {
       throw new Error("Email and password are required");

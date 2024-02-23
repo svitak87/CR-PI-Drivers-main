@@ -1,14 +1,14 @@
-/* Navbar.module.css */
+
 
 .headerContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black; /* Color de fondo negro */
-    padding: 0px; /* Añadir espaciado alrededor de la navbar */
-    margin-top: -10px; /* Compensar el espacio del padding */
-    margin-left: -10px; /* Compensar el espacio del padding */
-    margin-right: -10px; /* Compensar el espacio del padding */
+    background-color: black; 
+    padding: 0px; 
+    margin-top: -10px; 
+    margin-left: -10px; 
+    margin-right: -10px; 
   }
   
   .headerLeft {
@@ -17,14 +17,14 @@
   }
   
   .headerLogo img {
-    width: 100px; /* Tamaño del logo */
-    height: auto; /* Mantener la proporción */
-    margin-right: 0px; /* Espaciado entre el logo y los enlaces */
+    width: 100px; 
+    height: auto; 
+    margin-right: 0px; 
     margin-left: 30px;
   }
   
   .headerMiddle {
-    flex: 1; /* Toma todo el espacio disponible */
+    flex: 1; 
   }
   
   .headerSearch {
@@ -41,12 +41,12 @@
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-right: 10px; /* Espacio entre el input y el botón */
+    margin-right: 10px; 
   }
   
   .headerSearch button[type="submit"] {
     padding: 5px 10px;
-    background-color: #007bff; /* Color del botón */
+    background-color: #007bff; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -63,22 +63,22 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Cambia el comportamiento a "flex" */
+    display: flex; 
   }
   
   .left-headerNavigation ul li,
   .right-headerNavigation ul li {
-    margin-right: 10px; /* Espacio entre elementos */
+    margin-right: 10px; 
   }
   
-  /* Estilos para los enlaces dentro del navbar */
+ 
   .createLink,
   .homeLink,
   .aboutLink,
   .logOutLink {
-    color: #fff; /* Color del texto blanco */
+    color: #fff; 
     text-decoration: none;
     cursor: pointer;
-    margin-right: 50px; /* Espaciado entre los enlaces */
+    margin-right: 50px; 
   }
   

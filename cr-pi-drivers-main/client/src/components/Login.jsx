@@ -27,26 +27,37 @@ const Login = () => {
   const submitForm = async (event) => {
     event.preventDefault();
     const { email, password } = userCredentials;
-    if (
-      userCredentials.email === email &&
-      userCredentials.password === password
-    ) {
-      await dispatch(userLogin(userCredentials))
-      .then(() => {
-        setAccess(true);
+    if(email && password){
+      try {
+        await dispatch(userLogin(userCredentials))
+        setAccess(true),
         navigate('/home')
-      })
-      .catch((error) => {
-        if(error.message === "Incorrect credentials"){
+      } catch (error) {
+        if(error.message === "Password doesn't match"){
           setAccess(false);
-          setLoginError("Incorrect credentials")
+          setLoginError("Password doesn't match")
           setTimeout(() => {
             setUserCredentials({ ...userCredentials, email: "", password: "" });
+            setLoginError("")
+          }, 4000);
+        }else if(error.message === "Email doesn't exist"){
+          setAccess(false);
+          setLoginError("Email doesn't exist")
+          setTimeout(() => {
+            setUserCredentials({ ...userCredentials, email: "", password: "" });
+            setLoginError("")
           }, 4000);
         }
-      })
+      }
+    }else{
+        setAccess(false);
+        setLoginError("Email and password are required")
+        setTimeout(() => {
+          setUserCredentials({ ...userCredentials, email: "", password: "" });
+          setLoginError("")
+        }, 4000);
+      }
     }
-  };
 
   return (
     <div>
@@ -61,7 +72,7 @@ const Login = () => {
             value={userCredentials.email}
             onChange={handleChange}
             autoComplete="off"
-            required
+
           />
           {errors.email && <p>{errors.email}</p>}
         </div>
@@ -74,7 +85,6 @@ const Login = () => {
             value={userCredentials.password}
             onChange={handleChange}
             autoComplete="off"
-            required
           />
           {errors.password && <p>{errors.password}</p>}
         </div>

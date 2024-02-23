@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logoFormulaUno from "../assets/logoFormulaUno.png";
 import styles from "../components/Navbar.module.css";
@@ -16,6 +15,9 @@ const Navbar = ({onSearch}) => {
   const submitForm = async (event) => {
     event.preventDefault();
     onSearch(query); 
+    setTimeout(() => {
+      setQuery("")
+    }, 2000);
   };
 
   return (
@@ -37,7 +39,7 @@ const Navbar = ({onSearch}) => {
                   <p className={styles.createLink}>Create</p>
                 </li>
                 </Link>
-                <Link>
+                <Link to="/home">
                 <li>
                   <p className={styles.homeLink}>Home</p>
                 </li>
