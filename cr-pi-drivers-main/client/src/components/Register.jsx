@@ -31,40 +31,40 @@ const Register = () => {
   };
 
   const submitForm = async (event) => {
-    event.preventDefault();
-    if (userData.password === userData.passwordTwo) {
-      await dispatch(registerUser(userData))
-        .then(() => {
-          setSuccesAcount("Congratulations now you have an account");
-          setTimeout(() => {
-            navigate("/login");
-          }, 4000);
-        })
-        .catch((error) => {
-          if (error.message === "User already exists!") {
-            setRegistrationError("User already exists!");
-            setTimeout(() => {
-              setUserData({
-                name: "",
-                lastname: "",
-                email: "",
-                password: "",
-                passwordTwo: "",
-                answerOne: "",
-                answerTwo: ""
-              });
-            }, 4000);
-          } else {
-            console.error(error);
-          }
-        });
-    } else {
-      setPasswordValidation("Passwords do not match");
-      setTimeout(() => {
-        setUserData({ ...userData, password: "", passwordTwo: "" });
-      }, 3000);
+    try {
+      event.preventDefault();
+      if (userData.password === userData.passwordTwo) {
+        await dispatch(registerUser(userData));
+        setSuccesAcount("Congratulations now you have an account");
+        setTimeout(() => {
+          navigate("/login");
+        }, 4000);
+      } else {
+        setPasswordValidation("Passwords do not match");
+        setTimeout(() => {
+          setUserData({ ...userData, password: "", passwordTwo: "" });
+          setPasswordValidation("")
+        }, 3000);
+      }
+    } catch (error) {
+      if (error.message === "User already exists") {
+        setRegistrationError("User already exists");
+        setTimeout(() => {
+          setUserData({
+            name: "",
+            lastname: "",
+            email: "",
+            password: "",
+            passwordTwo: "",
+            answerOne: "",
+            answerTwo: ""
+          });
+          setRegistrationError("")
+        }, 4000);
+      }
     }
   };
+  
 
   return (
     <div>

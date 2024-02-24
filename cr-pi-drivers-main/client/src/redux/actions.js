@@ -14,22 +14,19 @@ import axios from "axios";
 export const registerUser = (userData) => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://localhost:3001/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await axios.post(
+        "http://localhost:3001/users/register",
+        userData
+      );
+      const data = response.data;
 
-      if (response.status === 409) {
-        throw new Error("User already exists!");
-      }
-
-      const data = await response.json();
       dispatch({ type: REGISTER_USER, payload: data });
     } catch (error) {
-      throw error;
+      if (error.response && error.response.status === 409) {
+        throw Error("User already exists");
+      } else if (error.response && error.response.status === 400) {
+        throw Error("Incomplete data");
+      }
     }
   };
 };
@@ -37,22 +34,21 @@ export const registerUser = (userData) => {
 export const userLogin = (credentialData) => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://localhost:3001/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentialData),
-      });
-      if (response.status === 404) {
-        throw Error("Email doesn't exist");
-      }else if(response.status === 403){
-        throw Error("Password doesn't match")
-      }
-      const data = await response.json();
+      const response = await axios.post(
+        "http://localhost:3001/users/login",
+        credentialData
+      );
+      const data = response.data;
+
       dispatch({ type: USER_LOGIN, payload: data });
     } catch (error) {
-      throw error;
+      if (error.response && error.response.status === 404) {
+        throw Error("Email doesn't exist");
+      } else if (error.response && error.response.status === 403) {
+        throw Error("Password doesn't match");
+      } else {
+        throw error;
+      }
     }
   };
 };
@@ -60,24 +56,21 @@ export const userLogin = (credentialData) => {
 export const recoverPassword = (userCredentials) => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://localhost:3001/users/recover", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userCredentials),
-      });
-      if (response.status === 400) {
-        throw new Error("Incomplete data provided");
-      } else if (response.status === 404) {
-        throw new Error("Email doesn't exist");
-      } else if (response.status === 403) {
-        throw new Error("Incorrect answers");
-      }
-      const data = await response.json();
+      const response = await axios.put(
+        "http://localhost:3001/users/recover",
+        userCredentials
+      );
+      const data = response.data;
+
       dispatch({ type: FORGOT_PASSWORD, payload: data });
     } catch (error) {
-      throw error
+      if (error.response && error.response.status === 403) {
+        throw Error("Incorrect answers");
+      } else if (error.response && error.response.status === 400) {
+        throw Error("Incomplete data provided");
+      } else if (error.response && error.response.status === 404) {
+        throw Error("Email doesn't exist");
+      }
     }
   };
 };
@@ -109,34 +102,35 @@ export const getAllDrivers = () => {
 export const findByName = (query) => {
   return async function (dispatch) {
     try {
-      const queryFromApiResponse = await axios.get(`http://localhost:3001/query/api/name?name=${query}`);
+      const queryFromApiResponse = await axios.get(
+        `http://localhost:3001/query/api/name?name=${query}`
+      );
       let queryFromDbResponse;
       try {
-        queryFromDbResponse = await axios.get(`http://localhost:3001/query/database/name?name=${query}`);
+        queryFromDbResponse = await axios.get(
+          `http://localhost:3001/query/database/name?name=${query}`
+        );
       } catch (Error) {
-        
         if (Error.response && Error.response.status === 404) {
-          queryFromDbResponse = { data: [] }; 
+          queryFromDbResponse = { data: [] };
         } else {
-          throw Error; 
+          throw Error;
         }
       }
-      
+
       const combineInfo = {
         dataFromDb: queryFromDbResponse.data,
         dataFromApi: queryFromApiResponse.data,
       };
       dispatch({ type: FIND_BY_NAME, payload: combineInfo });
       return combineInfo;
-
     } catch (error) {
-      if(error.response && error.response.status === 404){
-        throw Error("There are no drivers with that query")
+      if (error.response && error.response.status === 404) {
+        throw Error("There are no drivers with that query");
       }
     }
   };
 };
-
 
 export const getDriverDetail = (id) => {
   return async function (dispatch) {
@@ -179,9 +173,8 @@ export const createDriver = (driverData) => {
 export const getAllTeams = () => {
   return async (dispatch) => {
     try {
-      const response = await axios
-      .get(`http://localhost:3001/teams`);
-     
+      const response = await axios.get(`http://localhost:3001/teams`);
+
       dispatch({ type: GET_ALL_TEAMS, payload: response.data });
     } catch (error) {
       if (error.message && error.response.status === 400) {
@@ -194,15 +187,14 @@ export const getAllTeams = () => {
 
 export const nextPage = (currentPage) => {
   return (dispatch) => {
-    const nextpage = currentPage + 1
+    const nextpage = currentPage + 1;
     dispatch({ type: NEXT_PAGE, payload: nextpage });
-  }
-}
+  };
+};
 
 export const previousPage = (currentPage) => {
   return (dispatch) => {
-    const previouspage = currentPage - 1
+    const previouspage = currentPage - 1;
     dispatch({ type: PREVIOUS_PAGE, payload: previouspage });
-  }
-}
-
+  };
+};
