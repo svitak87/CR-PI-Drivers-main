@@ -8,6 +8,8 @@ export const CREATE_DRIVER = "CREATE_DRIVER";
 export const GET_ALL_TEAMS = "GET_ALL_TEAMS";
 export const NEXT_PAGE = "NEXT_PAGE";
 export const PREVIOUS_PAGE = "PREVIOUS_PAGE";
+export const FILTER_DRIVERS = "FILTER_DRIVERS";
+export const FILTER_BY_TEAM = "FILTER_BY_TEAM";
 
 import axios from "axios";
 
@@ -184,6 +186,14 @@ export const getAllTeams = () => {
     }
   };
 };
+
+export const filterDrivers = (filter) => {
+  return {type: FILTER_DRIVERS, payload: filter}
+}
+
+export const filterByTeam = (team) => {
+  return {type: FILTER_BY_TEAM, payload: team}
+}
 
 export const nextPage = (currentPage) => {
   return (dispatch) => {

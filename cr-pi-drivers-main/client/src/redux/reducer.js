@@ -9,6 +9,8 @@ import {
   GET_ALL_TEAMS,
   NEXT_PAGE,
   PREVIOUS_PAGE,
+  FILTER_DRIVERS,
+  FILTER_BY_TEAM
 } from "./actions";
 
 const initialState = {
@@ -20,7 +22,9 @@ const initialState = {
   currentPage: 1,
   driversPerPage: 9,
   queryDriversApi: [],
-  queryDriversDb: []
+  queryDriversDb: [],
+  filterDrivers: [],
+  filterTeams: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -47,13 +51,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         apiDrivers: [...payload.dataFromApi.data],
         dbDrivers: [...payload.dataFromDb.data],
       };
-      case FIND_BY_NAME:
+    case FIND_BY_NAME:
         return {
           ...state,
           queryDriversApi: [...payload.dataFromApi],
           queryDriversDb: [...payload.dataFromDb]
-        };
-      
+        };     
     case GET_DRIVER_DETAIL:
       return {
         ...state,
@@ -70,6 +73,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         teams: [...state.teams, ...payload],
       };
+    case FILTER_DRIVERS:
+      if(payload === 'api'){
+        return {
+          ...state,
+          filterDrivers: state.apiDrivers
+        }
+      }else if(payload === 'database'){
+        return {
+          ...state,
+          filterDrivers: state.dbDrivers
+        }
+      }
+      case FILTER_BY_TEAM:
+        console.log(payload)
+        return {
+          ...state,
+          filterTeams: state.apiDrivers.filter((driver) => {
+            return driver.teams?.includes(payload);
+          })
+        };
+      
     case NEXT_PAGE:
       return {
         ...state,

@@ -1,4 +1,4 @@
-const { Driver } = require("../db");
+const { Driver, Team } = require("../db");
 const api = require("../../api/db.json");
 const { Op } = require("sequelize");
 
@@ -36,7 +36,14 @@ const searchInDatabase = async (query) => {
         },
       ],
     },
-    limit: 15,
+    include: [
+      {
+        model: Team,
+        attributes: ['name'], 
+        through: { attributes: [] }
+      }
+    ],
+    limit: 15, 
   });
   
   if (!queryDb || queryDb.length === 0) { 
@@ -45,6 +52,7 @@ const searchInDatabase = async (query) => {
     return queryDb;
   }
 };
+
 
 module.exports = {
   searchInApi,

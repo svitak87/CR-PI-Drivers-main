@@ -26,3 +26,4 @@ const validate = (userData) => {
   };
   
   export default validate;
+

@@ -133,7 +133,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <label htmlFor="answerOne">What's your father first name?</label>
+          <label htmlFor="answerOne">What's your first father name?</label>
           <input
             type="text"
             name="answerOne"

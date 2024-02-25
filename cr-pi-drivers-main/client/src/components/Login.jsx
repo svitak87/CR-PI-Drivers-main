@@ -37,14 +37,14 @@ const Login = () => {
           setAccess(false);
           setLoginError("Password doesn't match")
           setTimeout(() => {
-            setUserCredentials({ ...userCredentials, email: "", password: "" });
+            setUserCredentials({email: "", password: ""});
             setLoginError("")
           }, 4000);
         }else if(error.message === "Email doesn't exist"){
           setAccess(false);
           setLoginError("Email doesn't exist")
           setTimeout(() => {
-            setUserCredentials({ ...userCredentials, email: "", password: "" });
+            setUserCredentials({email: "", password: ""});
             setLoginError("")
           }, 4000);
         }
