@@ -10,6 +10,9 @@ export const NEXT_PAGE = "NEXT_PAGE";
 export const PREVIOUS_PAGE = "PREVIOUS_PAGE";
 export const FILTER_DRIVERS = "FILTER_DRIVERS";
 export const FILTER_BY_TEAM = "FILTER_BY_TEAM";
+export const ORDER_DRIVERS_API_DOB = "ORDER_DRIVERS_API_DOB";
+export const ORDER_DRIVERS_API_ALPHA = "ORDER_DRIVERS_API_ALPHA"
+
 
 import axios from "axios";
 
@@ -78,99 +81,64 @@ export const recoverPassword = (userCredentials) => {
 };
 
 export const getAllDrivers = () => {
-  return async function (dispatch) {
+  return async (dispatch) => {
     try {
-      const [dataFromDb, dataFromApi] = await Promise.all([
-        axios.get("http://localhost:3001/drivers").catch((error) => {
-          if (error.response && error.response.status === 404) {
-            return { data: [] };
-          }
-          throw error;
-        }),
-        axios.get("http://localhost:5000/drivers"),
-      ]);
-      const combineInfo = {
-        dataFromDb: dataFromDb,
-        dataFromApi: dataFromApi,
-      };
-      dispatch({ type: GET_ALL_DRIVERS, payload: combineInfo });
-      return combineInfo;
+      const response = await axios.get('http://localhost:3001/drivers');
+    const drivers = response.data
+
+    dispatch({ type: GET_ALL_DRIVERS, payload: drivers })
     } catch (error) {
-      throw error;
+      if(error.response && error.response.status === 404){
+        throw {error: error.message}
+      }
     }
-  };
-};
+  }
+}
 
 export const findByName = (query) => {
-  return async function (dispatch) {
+  return async (dispatch) => {
     try {
-      const queryFromApiResponse = await axios.get(
-        `http://localhost:3001/query/api/name?name=${query}`
-      );
-      let queryFromDbResponse;
-      try {
-        queryFromDbResponse = await axios.get(
-          `http://localhost:3001/query/database/name?name=${query}`
-        );
-      } catch (Error) {
-        if (Error.response && Error.response.status === 404) {
-          queryFromDbResponse = { data: [] };
-        } else {
-          throw Error;
-        }
-      }
+      const response = await axios.get(`http://localhost:3001/drivers/name?name=${query}`);
+      const data = response.data;
 
-      const combineInfo = {
-        dataFromDb: queryFromDbResponse.data,
-        dataFromApi: queryFromApiResponse.data,
-      };
-      dispatch({ type: FIND_BY_NAME, payload: combineInfo });
-      return combineInfo;
+      dispatch({ type: FIND_BY_NAME, payload: data });
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        throw Error("There are no drivers with that query");
+      if(error.response && error.response.status === 404){
+        throw new Error("There are no drivers with that query")
       }
     }
-  };
-};
+  }
+}
 
 export const getDriverDetail = (id) => {
-  return async function (dispatch) {
+  return async (dispatch) => {
     try {
-      const response = await axios
-        .get(`http://localhost:3001/drivers/${id}`)
-        .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            return { error: error.response };
-          }
-          throw error;
-        });
-      dispatch({ type: GET_DRIVER_DETAIL, payload: response.data });
-      return response;
+      const response = await axios.get(`http://localhost:3001/drivers/${id}`);
+      const data = response.data;
+
+      dispatch({ type: GET_DRIVER_DETAIL, payload: data });
     } catch (error) {
-      throw error;
+      if (error.response && error.response.status === 404) {
+        return { error: error.response };
+      }
     }
-  };
-};
+  }
+}
 
 export const createDriver = (driverData) => {
   return async (dispatch) => {
     try {
-      const response = await axios
-        .post(`http://localhost:3001/drivers`, driverData)
-        .catch((error) => {
-          if (error.response && error.response.status === 400) {
-            return { error: error.response };
-          }
-          throw error;
-        });
-      dispatch({ type: CREATE_DRIVER, payload: response.data });
-      return response;
+      const response = await axios.post(`http://localhost:3001/drivers`, driverData)
+      const data = response.data;
+
+      dispatch({ type: CREATE_DRIVER, payload: data });
     } catch (error) {
-      throw error;
+      if (error.response && error.response.status === 400) {
+        return { error: error.response };
+      }
     }
-  };
-};
+  }
+}
 
 export const getAllTeams = () => {
   return async (dispatch) => {
@@ -188,23 +156,34 @@ export const getAllTeams = () => {
 };
 
 export const filterDrivers = (filter) => {
-  return {type: FILTER_DRIVERS, payload: filter}
-}
+  return { type: FILTER_DRIVERS, payload: filter };
+};
 
 export const filterByTeam = (team) => {
-  return {type: FILTER_BY_TEAM, payload: team}
+  return { type: FILTER_BY_TEAM, payload: team };
+};
+
+export const orderByDate = (order) => {
+  return {type: ORDER_DRIVERS_API_DOB, payload: order}
 }
 
-export const nextPage = (currentPage) => {
-  return (dispatch) => {
-    const nextpage = currentPage + 1;
-    dispatch({ type: NEXT_PAGE, payload: nextpage });
+export const orderAlphabetic = (order) => {
+  return {type: ORDER_DRIVERS_API_ALPHA, payload: order}
+}
+
+export const nextPage = () => {
+  return (dispatch, getState) => {
+    const { currentPage } = getState();
+    const nextPage = currentPage + 1;
+    dispatch({ type: NEXT_PAGE, payload: nextPage });
   };
 };
 
-export const previousPage = (currentPage) => {
-  return (dispatch) => {
-    const previouspage = currentPage - 1;
-    dispatch({ type: PREVIOUS_PAGE, payload: previouspage });
+export const previousPage = () => {
+  return (dispatch, getState) => {
+    const { currentPage } = getState();
+    const previousPage = currentPage - 1;
+    dispatch({ type: PREVIOUS_PAGE, payload: previousPage });
   };
 };
+

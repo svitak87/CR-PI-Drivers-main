@@ -11,8 +11,9 @@ const getDriversQuery = require('../routes/getDriversQueryRoute');
 router.use(getAllDriversRoute);
 router.use(getAllTeamsRoute);
 router.use(createDriverRoute);
+router.use(getDriversQuery);
 router.use(getDriverDetailRoute);
-router.use('/query', getDriversQuery);
+
 
 //Users routes:
 

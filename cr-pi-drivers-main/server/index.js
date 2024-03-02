@@ -1,4 +1,5 @@
 const axios = require("axios");
+const os = require('os')
 const server = require("./src/server");
 const { sequelize } = require("../server/src/db");
 const PORT = 3001;

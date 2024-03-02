@@ -10,21 +10,23 @@ import {
   NEXT_PAGE,
   PREVIOUS_PAGE,
   FILTER_DRIVERS,
-  FILTER_BY_TEAM
+  FILTER_BY_TEAM,
+  ORDER_DRIVERS_API_DOB,
+  ORDER_DRIVERS_API_ALPHA,
 } from "./actions";
 
 const initialState = {
   users: [],
   drivers: [],
-  apiDrivers: [],
-  dbDrivers: [],
+  queryDrivers: [],
+  driversByTeams: [],
+  filterDriversApi: [],
+  filterDriversDb: [],
   teams: [],
   currentPage: 1,
   driversPerPage: 9,
-  queryDriversApi: [],
-  queryDriversDb: [],
-  filterDrivers: [],
-  filterTeams: []
+  orderDateDrivers: [],
+  orderAlphaDrivers: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -45,18 +47,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
         users: payload,
       };
     case GET_ALL_DRIVERS:
-  
       return {
         ...state,
-        apiDrivers: [...payload.dataFromApi.data],
-        dbDrivers: [...payload.dataFromDb.data],
+        drivers: payload,
       };
     case FIND_BY_NAME:
-        return {
-          ...state,
-          queryDriversApi: [...payload.dataFromApi],
-          queryDriversDb: [...payload.dataFromDb]
-        };     
+      return {
+        ...state,
+        queryDrivers: payload,
+      };
     case GET_DRIVER_DETAIL:
       return {
         ...state,
@@ -68,32 +67,69 @@ const rootReducer = (state = initialState, { type, payload }) => {
         drivers: [...state.drivers, payload],
       };
     case GET_ALL_TEAMS:
-      console.log(teams);
       return {
         ...state,
         teams: [...state.teams, ...payload],
       };
     case FILTER_DRIVERS:
-      if(payload === 'api'){
+      if (payload === "api") {
+        const apiDrivers = state.drivers.filter((driver) =>
+          Number.isInteger(driver.id)
+        );
         return {
           ...state,
-          filterDrivers: state.apiDrivers
-        }
-      }else if(payload === 'database'){
-        return {
-          ...state,
-          filterDrivers: state.dbDrivers
-        }
-      }
-      case FILTER_BY_TEAM:
-        console.log(payload)
-        return {
-          ...state,
-          filterTeams: state.apiDrivers.filter((driver) => {
-            return driver.teams?.includes(payload);
-          })
+          filterDriversApi: apiDrivers,
         };
-      
+      } else if (payload === "database") {
+        const dbDrivers = state.drivers.filter(
+          (driver) => typeof driver.id === "string"
+        );
+        return {
+          ...state,
+          filterDriversDb: dbDrivers,
+        };
+      }
+    case FILTER_BY_TEAM:
+      const filteredDrivers = state.drivers.filter((driver) => {
+        return driver.teams.some((team) => team.name === payload);
+      });
+      return {
+        ...state,
+        driversByTeams: filteredDrivers,
+      };
+    case ORDER_DRIVERS_API_DOB:
+      let orderedDrivers = [...state.drivers];
+      orderedDrivers.sort((a, b) => {
+        const dateA = new Date(a.dob).getTime();
+        const dateB = new Date(b.dob).getTime();
+        if (payload === "ascending") {
+          return dateA - dateB;
+        } else if (payload === "descending") {
+          return dateB - dateA;
+        }
+        return 0;
+      });
+      return {
+        ...state,
+        orderDateDrivers: orderedDrivers,
+      };
+    case ORDER_DRIVERS_API_ALPHA:
+      console.log(payload)
+      return {
+        ...state,
+        orderAlphaDrivers: state.drivers.slice().sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+
+          if (payload === "ascending") {
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+          } else if (payload === "descending") {
+            if (nameA < nameB) return 1;
+            if (nameA > nameB) return -1;
+          }
+        }),
+      };
     case NEXT_PAGE:
       return {
         ...state,

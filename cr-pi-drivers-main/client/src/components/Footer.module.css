@@ -1,0 +1,58 @@
+/* Footer.module.css */
+
+.footerContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .footer {
+    font-size: 14px;
+  }
+  
+  .footer b {
+    color: #ebebe2; /* Color específico para el elemento <b> dentro del footer */
+  }
+
+  .facebook {
+    position: fixed;
+    bottom: 0px;
+    right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b5998;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  .facebook:hover {
+    background-color: #32508e;
+  }
+  
+  .github{
+    position: fixed;
+    bottom: 0px;
+    right: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5f6063;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  

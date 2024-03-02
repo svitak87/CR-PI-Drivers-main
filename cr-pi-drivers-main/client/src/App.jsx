@@ -6,6 +6,7 @@ import Home from "../src/views/Home/Home";
 import Forgotpassword from "../src/components/Forgotpassword";
 import Details from "./views/Details/Details";
 import Form from "./views/Form/Form"
+import Footer from '../src/components/Footer'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/details/:id" element={<Details />} />
         <Route path="/create" element={<Form />} />
       </Routes>
+      <Footer />
     </>
   );
 }

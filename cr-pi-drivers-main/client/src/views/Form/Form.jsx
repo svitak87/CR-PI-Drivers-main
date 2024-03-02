@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createDriver, getAllTeams } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import validate from "../../assets/formValidation";
 import Navbar from "../../components/Navbar";
 
 const Form = () => {
@@ -19,6 +20,14 @@ const Form = () => {
     dob: "",
     TeamName: [],
   });
+  const [errors, setErrors] = useState({
+    name: "",
+    lastname: "",
+    description: "",
+    image: "",
+    nationality: "",
+    dob: "",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,6 +35,8 @@ const Form = () => {
       ...prevState,
       [name]: value,
     }));
+    const validationErrors = validate({ ...driverData, [name]: value });
+    setErrors(validationErrors);
   };
 
   const handleTeamsChange = (event) => {
@@ -40,54 +51,37 @@ const Form = () => {
       ...prevState,
       TeamName: [...selectedTeams],
     }));
-    console.log(selectedTeams);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await dispatch(createDriver(driverData));
-      if (response.error) {
-        setCreated(false);
-        setErrorCreation("Incomplete data");
-        setTimeout(() => {
-          setErrorCreation("");
-          setDriverData({
-            name: "",
-            lastname: "",
-            description: "",
-            image: "",
-            nationality: "",
-            dob: "",
-          });
-        }, 4000);
-      } else {
-        setCreated(true);
-        setErrorCreation("The driver was created succesfully");
-        setTimeout(() => {
-          setDriverData({
-            name: "",
-            lastname: "",
-            description: "",
-            image: "",
-            nationality: "",
-            dob: "",
-          });
-          navigate("/home");
-        }, 4000);
-      }
+      await dispatch(createDriver(driverData));
+      setCreated(true);
+      setErrorCreation("The driver was created succesfully");
+      setTimeout(() => {
+        setDriverData({
+          name: "",
+          lastname: "",
+          description: "",
+          image: "",
+          nationality: "",
+          dob: "",
+        });
+        navigate("/home");
+      }, 4000);
     } catch (error) {
-      console.error("Error creating driver:", error);
+      throw error;
     }
   };
+
   useEffect(() => {
     dispatch(getAllTeams());
   }, [dispatch]);
 
   const disebleButton = () => {
     return (
-      !driverData.TeamName ||
+      driverData.TeamName.length === 0 ||
       !driverData.name ||
       !driverData.lastname ||
       !driverData.description ||
@@ -110,6 +104,7 @@ const Form = () => {
             value={driverData.name}
             onChange={handleChange}
           />
+          {errors.name && <p>{errors.name}</p>}
         </div>
         <div>
           <label htmlFor="lastName">Last Name:</label>
@@ -120,6 +115,7 @@ const Form = () => {
             value={driverData.lastname}
             onChange={handleChange}
           />
+          {errors.lastname && <p>{errors.lastname}</p>}
         </div>
         <div>
           <label htmlFor="nationality">Nationality:</label>
@@ -130,6 +126,7 @@ const Form = () => {
             value={driverData.nationality}
             onChange={handleChange}
           />
+          {errors.nationality && <p>{errors.nationality}</p>}
         </div>
         <div>
           <label htmlFor="image">Image:</label>
@@ -140,6 +137,7 @@ const Form = () => {
             value={driverData.image}
             onChange={handleChange}
           />
+          {errors.image && <p>{errors.image}</p>}
         </div>
         <div>
           <label htmlFor="dob">Date of Birth:</label>
@@ -150,6 +148,7 @@ const Form = () => {
             value={driverData.dob}
             onChange={handleChange}
           />
+          {errors.dob && <p>{errors.dob}</p>}
         </div>
         <div>
           <label htmlFor="description">Description:</label>
@@ -159,6 +158,7 @@ const Form = () => {
             value={driverData.description}
             onChange={handleChange}
           />
+          {errors.description && <p>{errors.description}</p>}
         </div>
         <div>
           <label htmlFor="teams">Teams:</label>
@@ -189,4 +189,3 @@ const Form = () => {
 };
 
 export default Form;
-

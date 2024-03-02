@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { userLogin } from "../redux/actions";
 import { Link } from "react-router-dom";
 import validate from "../assets/passwordValidation";
+import style from "./Login.module.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Login = () => {
   });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [access, setAccess] = useState(false);
-  const [loginError, setLoginError] = useState("")
+  const [loginError, setLoginError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,43 +28,42 @@ const Login = () => {
   const submitForm = async (event) => {
     event.preventDefault();
     const { email, password } = userCredentials;
-    if(email && password){
+    if (email && password) {
       try {
-        await dispatch(userLogin(userCredentials))
-        setAccess(true),
-        navigate('/home')
+        await dispatch(userLogin(userCredentials));
+        setAccess(true), navigate("/home");
       } catch (error) {
-        if(error.message === "Password doesn't match"){
+        if (error.message === "Password doesn't match") {
           setAccess(false);
-          setLoginError("Password doesn't match")
+          setLoginError("Password doesn't match");
           setTimeout(() => {
-            setUserCredentials({email: "", password: ""});
-            setLoginError("")
+            setUserCredentials({ email: "", password: "" });
+            setLoginError("");
           }, 4000);
-        }else if(error.message === "Email doesn't exist"){
+        } else if (error.message === "Email doesn't exist") {
           setAccess(false);
-          setLoginError("Email doesn't exist")
+          setLoginError("Email doesn't exist");
           setTimeout(() => {
-            setUserCredentials({email: "", password: ""});
-            setLoginError("")
+            setUserCredentials({ email: "", password: "" });
+            setLoginError("");
           }, 4000);
         }
       }
-    }else{
-        setAccess(false);
-        setLoginError("Email and password are required")
-        setTimeout(() => {
-          setUserCredentials({ ...userCredentials, email: "", password: "" });
-          setLoginError("")
-        }, 4000);
-      }
+    } else {
+      setAccess(false);
+      setLoginError("Email and password are required");
+      setTimeout(() => {
+        setUserCredentials({ ...userCredentials, email: "", password: "" });
+        setLoginError("");
+      }, 4000);
     }
+  };
 
   return (
-    <div>
+    <div className={style.container}>
       <h2>Login</h2>
       <form onSubmit={submitForm}>
-        <div>
+        <div className={style.inputContainer}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -72,11 +72,10 @@ const Login = () => {
             value={userCredentials.email}
             onChange={handleChange}
             autoComplete="off"
-
           />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && <p className={style.error}>{errors.email}</p>}
         </div>
-        <div>
+        <div className={style.inputContainer}>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -86,11 +85,11 @@ const Login = () => {
             onChange={handleChange}
             autoComplete="off"
           />
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && <p className={style.error}>{errors.password}</p>}
         </div>
         <button type="submit">Login</button>
       </form>
-      {loginError && <p>{loginError}</p>}
+      {loginError && <p className={style.error}>{loginError}</p>}
       <p>¿Don't you have an account?</p>
       <Link to="/register">
         <p>Register now!</p>

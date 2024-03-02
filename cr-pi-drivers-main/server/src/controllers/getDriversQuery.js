@@ -2,26 +2,11 @@ const { Driver, Team } = require("../db");
 const api = require("../../api/db.json");
 const { Op } = require("sequelize");
 
-const searchInApi = (query) => {
+const getDriversQuery = async (query) => {
+  const drivers = [];
+  try {
   const lowercaseQuery = query.toLowerCase();
-  const queryApi = api.drivers
-    .filter((driver) => {
-      const fullName =
-        `${driver.name.forename} ${driver.name.surname}`.toLowerCase();
-      return fullName.includes(lowercaseQuery);
-    })
-    .slice(0, 15);
-  
-  if (queryApi.length === 0) { 
-    throw new Error("There are no drivers with that query");
-  } else {
-    return queryApi;
-  }
-};
-
-const searchInDatabase = async (query) => {
-  const lowercaseQuery = query.toLowerCase();
-  const queryDb = await Driver.findAll({
+  const driversDb = await Driver.findAll({
     where: {
       [Op.or]: [
         {
@@ -45,16 +30,49 @@ const searchInDatabase = async (query) => {
     ],
     limit: 15, 
   });
-  
-  if (!queryDb || queryDb.length === 0) { 
-    throw new Error("There are no drivers with that query");
-  } else {
-    return queryDb;
+  const transformedDriversDb = driversDb.map(driver => ({
+    id: driver.id,
+    name: driver.name,
+    lastname: driver.lastname,
+    image: driver.image,
+    dob: driver.dob,
+    nationality: driver.nationality,
+    teams: driver.Teams.map(team => ({ name: team.name }))
+  }));
+
+  drivers.push(...transformedDriversDb);
+
+  const driversApi = api.drivers
+    .filter((driver) => {
+      const fullName =
+        `${driver.name.forename} ${driver.name.surname}`.toLowerCase();
+      return fullName.includes(lowercaseQuery);
+    })
+    .slice(0, 15);
+
+    driversApi.forEach(driverApi => {
+      const teams = driverApi.teams ? driverApi.teams.split(", ").map((team) => ({ name: team.trim() })) : [];
+      const driver = {
+        id: driverApi.id,
+        name: driverApi.name.forename,
+        lastname: driverApi.name.surname,
+        image: driverApi.image.url,
+        dob: driverApi.dob,
+        nationality: driverApi.nationality,
+        teams: teams,
+      };
+      drivers.push(driver);
+    });
+
+
+    if(drivers.length === 0){
+      throw new Error("There are no drivers with that query")
+    }else{
+      return drivers;
+    }
+  } catch (error) {
+    throw error;
   }
-};
+}
 
-
-module.exports = {
-  searchInApi,
-  searchInDatabase,
-};
+module.exports = getDriversQuery;
