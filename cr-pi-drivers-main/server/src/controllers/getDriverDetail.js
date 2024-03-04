@@ -5,21 +5,29 @@ const getDriverDetail = async (id) => {
   try {
     const stringId = String(id);
 
-    const driverApiFound = api.drivers.find((driver) => String(driver.id) === stringId);
+    const driverApiFound = api.drivers.find(
+      (driver) => String(driver.id) === stringId
+    );
 
     if (driverApiFound) {
-      return {
+      const teams = driverApiFound.teams
+        ? driverApiFound.teams
+            .split(", ")
+            .map((team) => ({ name: team.trim() }))
+        : [];
+      const driverApi = {
         id: driverApiFound.id,
-        name: `${driverApiFound.name.forename}`,
-        lastname: `${driverApiFound.name.surname}`,
-        nationality: driverApiFound.nationality,
-        image: driverApiFound.image.url,
+        name: driverApiFound.name.forename,
+        lastname: driverApiFound.name.surname,
         description: driverApiFound.description,
+        image: driverApiFound.image.url,
         dob: driverApiFound.dob,
-        teams: driverApiFound.teams,
+        nationality: driverApiFound.nationality,
+        teams: teams,
       };
+      return driverApi;
     }
-    const driverFound = await Driver.findByPk(stringId, {
+    const driverDbFound = await Driver.findByPk(stringId, {
       include: {
         model: Team,
         attributes: ["name"],
@@ -29,11 +37,22 @@ const getDriverDetail = async (id) => {
       },
     });
 
-    if (driverFound) {
-      return driverFound;
+    if (driverDbFound) {
+      const teams = driverDbFound.Teams.map((team) => ({ name: team.name }));
+      const driverDb = {
+        id: driverDbFound.id,
+        name: driverDbFound.name,
+        lastname: driverDbFound.lastname,
+        description: driverDbFound.description,
+        image: driverDbFound.image,
+        dob: driverDbFound.dob,
+        nationality: driverDbFound.nationality,
+        teams: teams,
+      };
+      return driverDb;
     }
   } catch (error) {
-    throw new Error("There's no a driver with that ID")
+    throw new Error("There's no a driver with that ID");
   }
 };
 

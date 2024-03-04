@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin: 0 auto;
+    margin-right: 900px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+
+  input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 50px; 
+    margin-right: 100px;
+    width: 250px;
+  }
+  
+  .submitButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    margin-right: 200px;
+    margin-top: 30px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .error {
+    color: red;
+    margin-top: -40px;
+    margin-left: 5px; 
+    margin-bottom: 0px;
+    position: absolute;
+}
+
+.passwordValidation{
+  color: red;
+    margin-top: -40px;
+    margin-left: 5px; 
+    margin-bottom: 100px;
+    position: absolute;
+}
+.registrationError{
+  color: red;
+    margin-top: -40px;
+    margin-left: 5px; 
+    margin-bottom: 100px;
+    position: absolute;
+}
+
+.success{
+  color: rgb(4, 119, 4);
+  margin-top: -40px;
+  margin-left: 5px; 
+  margin-bottom: 20px;
+  position: absolute;
+}
+
+.ifYou{
+    color: #ccc
+}
+
+.registerImage {
+    max-width: 100%;
+    height: auto;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.registerNow {
+    color: #ebebe2;
+    margin-right: 180px;
+}
+
+.alreadyRegister {
+    color: #ebebe2
+}

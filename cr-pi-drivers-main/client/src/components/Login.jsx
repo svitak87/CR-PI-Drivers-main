@@ -17,6 +17,12 @@ const Login = () => {
   const [access, setAccess] = useState(false);
   const [loginError, setLoginError] = useState("");
 
+  const disebleButton = () => {
+    return (
+      !userCredentials.email || !userCredentials.password
+    );
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserCredentials({ ...userCredentials, [name]: value });
@@ -61,7 +67,7 @@ const Login = () => {
 
   return (
     <div className={style.container}>
-      <h2>Login</h2>
+      <h2 className={style.login}>Login</h2>
       <form onSubmit={submitForm}>
         <div className={style.inputContainer}>
           <label htmlFor="email">Email:</label>
@@ -76,7 +82,7 @@ const Login = () => {
           {errors.email && <p className={style.error}>{errors.email}</p>}
         </div>
         <div className={style.inputContainer}>
-          <label htmlFor="password">Password:</label>
+          <label className={style.password} htmlFor="password">Password:</label>
           <input
             type="password"
             name="password"
@@ -87,15 +93,15 @@ const Login = () => {
           />
           {errors.password && <p className={style.error}>{errors.password}</p>}
         </div>
-        <button type="submit">Login</button>
+        {loginError && <p className={style.loginError}>{loginError}</p>}
+        <button type="submit" disabled={disebleButton()} className={style.loginButton}>Login</button>
       </form>
-      {loginError && <p className={style.error}>{loginError}</p>}
-      <p>¿Don't you have an account?</p>
+      <p className={style.dontHaveAccount}>¿Don't you have an account?</p>
       <Link to="/register">
-        <p>Register now!</p>
+        <p className={style.registerNow}>Register now!</p>
       </Link>
       <Link to="/recover">
-        <p>Forgot my password!</p>
+        <p className={style.forgotPassword}>Forgot my password!</p>
       </Link>
     </div>
   );

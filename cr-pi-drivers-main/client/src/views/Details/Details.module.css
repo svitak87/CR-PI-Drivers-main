@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    margin-bottom: 0px;
+    height: auto;
+    overflow-y: hidden;
+    margin-top: 0px;
+}
+
+.imageContainter {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 0px;
+    position: relative;
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.infoContainer > * {
+    margin-bottom: -10px; /* Ajusta el margen inferior según sea necesario */
+  }
+
+.backGroundImage{
+    max-width: 100%;
+    height: auto;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 50%;
+    z-index: -1;
+}
+

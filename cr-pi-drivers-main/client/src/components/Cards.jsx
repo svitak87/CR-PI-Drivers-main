@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllDrivers,
   nextPage,
   previousPage,
   filterByTeam,
   filterDrivers,
   orderByDate,
-  orderAlphabetic
+  orderAlphabetic,
 } from "../redux/actions";
 import Card from "./Card";
 import style from "./Cards.module.css";
@@ -26,9 +25,6 @@ const Cards = () => {
   const currentPage = useSelector((state) => state.currentPage);
   const driversPerPage = useSelector((state) => state.driversPerPage);
 
-  useEffect(() => {
-    dispatch(getAllDrivers());
-  }, [dispatch]);
 
   const handleNextPage = () => {
     dispatch(nextPage());
@@ -71,13 +67,12 @@ const Cards = () => {
   };
 
   const totalCards = Array.isArray(drivers) ? [...drivers] : [];
-  const queryDriver = [...queryDrivers];
   const indexOfLastCard = currentPage * driversPerPage;
   const indexOfFirstCard = indexOfLastCard - driversPerPage;
 
   const currentCards =
-    queryDriver.length > 0
-      ? queryDriver
+    queryDrivers.length > 0
+      ? queryDrivers.slice(indexOfFirstCard, indexOfLastCard)
       : driversByTeams.length > 0
       ? driversByTeams.slice(indexOfFirstCard, indexOfLastCard)
       : driversApi.length > 0
@@ -152,7 +147,11 @@ const Cards = () => {
         <button
           className={style.button}
           onClick={handleNextPage}
-          disabled={currentPage === Math.ceil(drivers.length / driversPerPage)}
+          disabled={
+            currentCards.length < driversPerPage ||
+            currentPage === Math.ceil(totalCards.length / driversPerPage) ||
+            totalCards.length < indexOfLastCard + 1
+          }
         >
           Next page
         </button>

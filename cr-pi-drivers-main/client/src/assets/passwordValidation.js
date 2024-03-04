@@ -17,7 +17,7 @@ const validate = (userData) => {
     if (!userData.password) {
       errors.password = "Empty password";
     } else if (!/\d/.test(userData.password)) {
-      errors.password = "The password must contain at least one number";
+      errors.password = "The password must contain a number";
     } else if (userData.password.length < 5 || userData.password.length > 10) {
       errors.password = "The password must be between 6 and 10 characters long";
     }

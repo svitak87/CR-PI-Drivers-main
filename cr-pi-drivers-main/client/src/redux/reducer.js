@@ -114,7 +114,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         orderDateDrivers: orderedDrivers,
       };
     case ORDER_DRIVERS_API_ALPHA:
-      console.log(payload)
       return {
         ...state,
         orderAlphaDrivers: state.drivers.slice().sort((a, b) => {

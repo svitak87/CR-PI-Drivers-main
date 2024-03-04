@@ -1,4 +1,4 @@
-/* Footer.module.css */
+
 
 .footerContainer {
     position: fixed;
@@ -17,7 +17,7 @@
   }
   
   .footer b {
-    color: #ebebe2; /* Color específico para el elemento <b> dentro del footer */
+    color: #ebebe2; 
   }
 
   .facebook {

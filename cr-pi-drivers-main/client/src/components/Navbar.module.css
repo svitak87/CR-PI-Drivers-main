@@ -1,84 +1,73 @@
-
-
 .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: black; 
-    padding: 0px; 
-    margin-top: -10px; 
-    margin-left: -10px; 
-    margin-right: -10px; 
-  }
-  
-  .headerLeft {
-    display: flex;
-    align-items: center;
-  }
-  
-  .headerLogo img {
-    width: 100px; 
-    height: auto; 
-    margin-right: 0px; 
-    margin-left: 30px;
-  }
-  
-  .headerMiddle {
-    flex: 1; 
-  }
-  
-  .headerSearch {
-    display: flex;
-    align-items: center;
-  }
-  
-  .headerSearch form {
-    display: flex;
-    align-items: center;
-  }
-  
-  .headerSearch input[type="text"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px; 
-  }
-  
-  .headerSearch button[type="submit"] {
-    padding: 5px 10px;
-    background-color: #007bff; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .headerRight {
-    display: flex;
-    align-items: center;
-  }
-  
-  .left-headerNavigation ul,
-  .right-headerNavigation ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex; 
-  }
-  
-  .left-headerNavigation ul li,
-  .right-headerNavigation ul li {
-    margin-right: 10px; 
-  }
-  
- 
-  .createLink,
-  .homeLink,
-  .aboutLink,
-  .logOutLink {
-    color: #fff; 
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: 50px; 
-  }
-  
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  background-color: black; 
+  color: white; 
+  padding: 10px; 
+  margin-left: -10px; 
+  margin-right: -10px; 
+  margin-top: -10px;
+}
+
+.headerLeft,
+.headerMiddle,
+.headerRight {
+  display: flex; 
+  align-items: center; 
+}
+
+.headerMiddle {
+  flex: 1; 
+  margin-left: 100px;
+}
+
+.leftHeaderNavigation,
+.rightHeaderNavigation {
+  display: flex;
+  gap: 60px; 
+}
+
+
+.headerSearch {
+  display: flex;
+  align-items: center;
+}
+
+.input{
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+.headerSearch form {
+  display: flex;
+  align-items: center;
+}
+
+.headerSearch input {
+  margin-right: 10px; 
+}
+
+.leftHeaderNavigation a,
+.rightHeaderNavigation a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoFormulaUno{
+  max-width: 100px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 5px 5px; 
+  font-size: 15px; 
+}
+

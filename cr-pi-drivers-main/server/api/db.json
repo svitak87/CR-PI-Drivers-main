@@ -29,7 +29,7 @@
         "dob": "1977-05-10",
         "nationality": "German",
         "url": "https://en.wikipedia.org/wiki/Nick_Heidfeld",
-        "teams": "Prost, Sauber, Jordan,Williams,BMW Sauber,Renault",
+        "teams": "Prost, Sauber, Jordan, Williams, BMW, Sauber, Renault",
         "description": "Nick Lars Heidfeld (born 10 May 1977) is a German professional racing driver. Despite scoring regular podium finishes in 2005 with Williams, and in 2007 and 2008 with BMW Sauber, Heidfeld never won a race after debuting in Formula One in 2000. Heidfeld currently holds two Formula One records; most podium finishes without a Grand Prix win, and the most second-place finishes without a wi. In 2011, Heidfeld raced in Formula One for the Renault team as a replacement for the injured Robert Kubica, his former BMW Sauber teammate,before being replaced by Bruno Senna. He last drove for the Rebellion Racing team in the FIA World Endurance Championship and for Mahindra Racing Formula E Team in Formula E."
       },
       {
@@ -373,7 +373,7 @@
         "dob": "1980-08-06",
         "nationality": "Italian",
         "url": "http://en.wikipedia.org/wiki/Vitantonio_Liuzzi",
-        "teams": "McLaren,Benetton, Williams, Joest Racing, Peugeot"
+        "teams": "McLaren, Benetton, Williams, Joest Racing, Peugeot"
       },
       {
         "id": 25,
@@ -388,7 +388,7 @@
         "dob": "1974-02-15",
         "nationality": "Austrian",
         "url": "http://en.wikipedia.org/wiki/Alexander_Wurz",
-        "teams": "Benetton,McLaren,Williams"
+        "teams": "Benetton, McLaren, Williams"
       },
       {
         "id": 26,
@@ -418,7 +418,7 @@
         "dob": "1979-04-16",
         "nationality": "Dutch",
         "url": "http://en.wikipedia.org/wiki/Christijan_Albers",
-        "teams": "Minardi,Midland,Spyker"
+        "teams": "Minardi, Midland, Spyker"
       },
       {
         "id": 28,
@@ -448,7 +448,7 @@
         "dob": "1982-07-09",
         "nationality": "Japanese",
         "url": "http://en.wikipedia.org/wiki/Sakon_Yamamoto",
-        "teams": "Super Aguri,Spyker,Hispania"
+        "teams": "Super Aguri, Spyker, Hispania"
       },
       {
         "id": 30,
@@ -470,7 +470,7 @@
         "driverRef": "montoya",
         "number": "\\N",
         "code": "MON",
-        "name": { "forename": "Juan", "surname": "Pablo Montoya" },
+        "name": { "forename": "Juan Pablo", "surname": "Montoya" },
         "image": {
           "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Juan_Pablo_Montoya_at_2021_Indianapolis_500_%2851222252077%29_%28cropped%29.jpg/800px-Juan_Pablo_Montoya_at_2021_Indianapolis_500_%2851222252077%29_%28cropped%29.jpg",
           "imageby": "By Zach Catanzareti Photo - juan pablo montoya, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=106446865"
@@ -493,7 +493,7 @@
         "dob": "1983-02-07",
         "nationality": "Austrian",
         "url": "http://en.wikipedia.org/wiki/Christian_Klien",
-        "teams": "Jaguar,Red Bull,HRT"
+        "teams": "Jaguar, Red Bull, HRT"
       },
       {
         "id": 33,
@@ -508,7 +508,7 @@
         "dob": "1976-07-24",
         "nationality": "Portuguese",
         "url": "http://en.wikipedia.org/wiki/Tiago_Monteiro",
-        "teams": "Jordan,Midland"
+        "teams": "Jordan, Midland"
       },
       {
         "id": 34,
@@ -538,7 +538,7 @@
         "dob": "1971-04-09",
         "nationality": "Canadian",
         "url": "http://en.wikipedia.org/wiki/Jacques_Villeneuve",
-        "teams": "Williams,BAR,Renault,Sauber,BMW Sauber"
+        "teams": "Williams, BAR, Renault, Sauber, BMW, Sauber"
       },
       {
         "id": 36,
@@ -553,7 +553,7 @@
         "dob": "1978-01-05",
         "nationality": "French",
         "url": "http://en.wikipedia.org/wiki/Franck_Montagny",
-        "teams": "Courage Compétition,DAMS,Team Oreca, Pescarolo Sport,Peugeot Total"
+        "teams": "Courage Compétition, DAMS, Team Oreca, Pescarolo Sport, Peugeot, Total"
       },
       {
         "id": 37,
@@ -568,7 +568,7 @@
         "dob": "1971-02-24",
         "nationality": "Spanish",
         "url": "http://en.wikipedia.org/wiki/Pedro_de_la_Rosa",
-        "teams": "Arrows,Jaguar,McLaren, Sauber, HRT"
+        "teams": "Arrows, Jaguar, McLaren, Sauber, HRT"
       },
       {
         "id": 38,
@@ -583,7 +583,7 @@
         "dob": "1981-09-23",
         "nationality": "Dutch",
         "url": "http://en.wikipedia.org/wiki/Robert_Doornbos",
-        "teams": "Minardi,Red Bull"
+        "teams": "Minardi, Red Bull"
       },
       {
         "id": 39,
@@ -598,7 +598,7 @@
         "dob": "1977-01-14",
         "nationality": "Indian",
         "url": "http://en.wikipedia.org/wiki/Narain_Karthikeyan",
-        "teams": "Jordan,HRT"
+        "teams": "Jordan, HRT"
       },
       {
         "id": 40,
@@ -628,7 +628,7 @@
         "dob": "1976-03-23",
         "nationality": "Brazilian",
         "url": "http://en.wikipedia.org/wiki/Ricardo_Zonta",
-        "teams": "BAR,Jordan,Toyota"
+        "teams": "BAR, Jordan, Toyota"
       },
       {
         "id": 42,
@@ -643,7 +643,7 @@
         "dob": "1980-09-11",
         "nationality": "Brazilian",
         "url": "http://en.wikipedia.org/wiki/Ant%C3%B4nio_Pizzonia",
-        "teams": "Jaguar,Williams"
+        "teams": "Jaguar, Williams"
       },
       {
         "id": 43,
@@ -673,7 +673,7 @@
         "dob": "1966-09-02",
         "nationality": "French",
         "url": "http://en.wikipedia.org/wiki/Olivier_Panis",
-        "teams": "Ligier,Prost,BAR,Toyota"
+        "teams": "Ligier, Prost, BAR, Toyota"
       },
       {
         "id": 45,
@@ -718,7 +718,7 @@
         "dob": "1981-01-01",
         "nationality": "Hungarian",
         "url": "http://en.wikipedia.org/wiki/Zsolt_Baumgartner",
-        "teams": "Jordan,Minardi"
+        "teams": "Jordan, Minardi"
       },
       {
         "id": 48,
@@ -748,7 +748,7 @@
         "dob": "1967-05-18",
         "nationality": "German",
         "url": "http://en.wikipedia.org/wiki/Heinz-Harald_Frentzen",
-        "teams": "Sauber,Williams, Jordan,Prost,Arrows"
+        "teams": "Sauber, Williams, Jordan, Prost, Arrows"
       },
       {
         "id": 50,
@@ -763,7 +763,7 @@
         "dob": "1972-03-04",
         "nationality": "Dutch",
         "url": "http://en.wikipedia.org/wiki/Jos_Verstappen",
-        "teams": "Benetton,Simtek,Footwork,Tyrrell,Stewart,Arrows,Minardi"
+        "teams": "Benetton, Simtek, Footwork, Tyrrell, Stewart, Arrows, Minardi"
       },
       {
         "id": 51,
@@ -808,7 +808,7 @@
         "dob": "1978-03-03",
         "nationality": "Danish",
         "url": "http://en.wikipedia.org/wiki/Nicolas_Kiesa",
-        "teams": "Minardi,Jordan"
+        "teams": "Minardi, Jordan"
       },
       {
         "id": 54,
@@ -823,7 +823,7 @@
         "dob": "1975-03-05",
         "nationality": "Brazilian",
         "url": "http://en.wikipedia.org/wiki/Luciano_Burti",
-        "teams": "Jaguar,Prost"
+        "teams": "Jaguar, Prost"
       },
       {
         "id": 55,
@@ -838,7 +838,7 @@
         "dob": "1964-06-11",
         "nationality": "French",
         "url": "http://en.wikipedia.org/wiki/Jean_Alesi",
-        "teams": "Tyrrell,Ferrari,Benetton,Sauber,Prost,Jordan"
+        "teams": "Tyrrell, Ferrari, Benetton, Sauber, Prost, Jordan"
       },
       {
         "id": 56,
@@ -853,7 +853,7 @@
         "dob": "1965-11-10",
         "nationality": "British",
         "url": "http://en.wikipedia.org/wiki/Eddie_Irvine",
-        "teams": "Jordan,Ferrari, Jaguar"
+        "teams": "Jordan, Ferrari, Jaguar"
       },
       {
         "id": 57,
@@ -868,7 +868,7 @@
         "dob": "1968-09-28",
         "nationality": "Finnish",
         "url": "http://en.wikipedia.org/wiki/Mika_H%C3%A4kkinen",
-        "teams": "Lotus,McLaren"
+        "teams": "Lotus, McLaren"
       },
       {
         "id": 58,
@@ -913,7 +913,7 @@
         "dob": "1975-05-08",
         "nationality": "Argentine",
         "url": "http://en.wikipedia.org/wiki/Gast%C3%B3n_Mazzacane",
-        "teams": "Minardi,Prost"
+        "teams": "Minardi, Prost"
       },
       {
         "id": 61,
@@ -958,7 +958,7 @@
         "dob": "1966-11-30",
         "nationality": "Finnish",
         "url": "http://en.wikipedia.org/wiki/Mika_Salo",
-        "teams": "Lotus,Tyrrell,Arrows,BAR,Ferrari,Sauber,Toyota"
+        "teams": "Lotus, Tyrrell, Arrows, BAR, Ferrari, Sauber, Toyota"
       },
       {
         "id": 64,
@@ -973,7 +973,7 @@
         "dob": "1970-05-22",
         "nationality": "Brazilian",
         "url": "http://en.wikipedia.org/wiki/Pedro_Diniz",
-        "teams": "Forti,Ligier,Arrows,Sauber"
+        "teams": "Forti, Ligier, Arrows, Sauber"
       },
       {
         "id": 65,
@@ -988,7 +988,7 @@
         "dob": "1964-06-25",
         "nationality": "British",
         "url": "http://en.wikipedia.org/wiki/Johnny_Herbert",
-        "teams": "Benetton,Tyrrell,Lotus,Ligier,Sauber,Stewart,Jaguar"
+        "teams": "Benetton, Tyrrell, Lotus, Ligier, Sauber, Stewart, Jaguar"
       },
       {
         "id": 66,
@@ -1510,7 +1510,7 @@
         "driverRef": "comas",
         "number": "\\N",
         "code": "\\N",
-        "name": { "forename": "Érik", "surname": "Comas" },
+        "name": { "forename": "Erik", "surname": "Comas" },
         "image": {
           "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Comas_lm2005.jpg/330px-Comas_lm2005.jpg",
           "imageby": "By Nuvolari72 - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=10954928"
@@ -1558,7 +1558,7 @@
         "driverRef": "bernard",
         "number": "\\N",
         "code": "\\N",
-        "name": { "forename": "Éric", "surname": "Bernard" },
+        "name": { "forename": "Eric", "surname": "Bernard" },
         "image": {
           "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Eric_Bernard_-_Ligier_JS39B_at_the_1994_British_Grand_Prix_%2831729365813%29.jpg/330px-Eric_Bernard_-_Ligier_JS39B_at_the_1994_British_Grand_Prix_%2831729365813%29.jpg",
           "imageby": "By Martin Lee from London, UK - Eric Bernard - Ligier JS39B at the 1994 British Grand Prix, CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=61204801"
@@ -3102,7 +3102,7 @@
         "dob": "1942-04-12",
         "nationality": "Argentine",
         "url": "http://en.wikipedia.org/wiki/Carlos_Reutemann",
-        "teams": "Brabham, Ferrari, Lotus , Williams",
+        "teams": "Brabham, Ferrari, Lotus, Williams",
         "description": "Carlos Alberto 'Lole' Reutemann was an Argentine racing driver who raced in Formula One from 1972 to 1982, and later became a politician in his native province of Santa Fe, for the Justicialist Party, and governor of Santa Fe in Argentina. As a racing driver, Reutemann was among Formula One's leading protagonists between 1972 and 1982. He scored 12 Grand Prix wins and six pole positions. In 1981 while driving for Williams he finished second in the World Drivers' Championship by one point, having been overtaken in the last race of the season. Reutemann also finished in third overall three times for three separate teams, 1975 for Brabham, 1978 for Ferrari, and 1980 for Williams. To date, he was the last Argentine driver to win a Grand Prix. In terms of race wins, his final Ferrari season in 1978 was his most successful with four wins, but he fell short to the consistency of the Lotus team with Mario Andretti and Ronnie Peterson and was not in championship contention to the final race. He finished third, just behind Peterson, who had died in an accident at Monza earlier that autumn. In 1981, Reutemann instead relied on consistency, but narrowly lost out to Nelson Piquet for the title.He became the second Formula One driver after Leo Kinnunen to be at the podium of a World Rally Championship event, when he finished third in the 1980 and 1985 editions of Rally Argentina. He was also for three decades the only Formula One driver to score drivers' championship points in both F1 and WRC, until Kimi Räikkönen's eighth place at the 2010 Jordan Rally. As a popular governor and a senator, he was considered by some, on several occasions, to be a worthy candidate for President, but while he considered running for president in the 2011 Argentine general election he declined to do so. Reutemann died in a medical facility in Santa Fe, Argentina on 7 July 2021 after suffering from issues relating to a haemorrhage as well as other health issues"
       },
       {

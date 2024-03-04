@@ -17,6 +17,10 @@ const Home = () => {
     dispatch(getAllTeams());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllDrivers());
+  }, [dispatch]);
+
   const handleSearch = (query) => {
     const obtainDriver = async () => {
       try {

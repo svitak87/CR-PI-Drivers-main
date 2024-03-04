@@ -1,52 +1,89 @@
-
-
 .container {
+    position: relative; /* Añade posicionamiento relativo */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #9c9c9c; 
+    background-color: #333; 
     padding: 20px; 
     border-radius: 10px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    max-width: 350px; 
-    margin: 0 auto; 
-}
-
-
-.inputContainer {
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    margin-right: 100px;
+    margin-top: 70px;
+  }
+  
+  .inputContainer {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-}
-
-label {
+    margin-right: -90px;
+    margin-bottom: 20px; 
+    position: relative; 
+  }
+  
+  label {
     margin-bottom: 5px; 
-}
-
-input {
+    color: #ebebe2;
+  }
+  
+  input {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-button {
+    margin-bottom: 0px; 
+    margin-right: 100px;
+  }
+  
+  .loginButton {
     padding: 10px 20px;
     background-color: #007bff;
     margin-right: 200px;
+    margin-top: -100px;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.error {
+  }
+  
+  .error {
     color: red;
-    margin-top: 5px;
     margin-left: 5px; 
-    margin-bottom: 10px;
-}
+    margin-bottom: -10px;
+    margin-top: 60px;
+    height: 15px; 
+    position: absolute; 
+  }
+
+  .loginError{
+    color: red;
+    margin-left: 5px; 
+    margin-bottom: -10px;
+    margin-top: -30px;
+    height: 15px; 
+    position: absolute; 
+  }
+  
+  .loginButton:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  .dontHaveAccount {
+    color: #ebebe2;
+  }
+  
+  .login {
+    color: #ebebe2;
+  }
+  
+  .registerNow {
+    margin-top: -10px;
+  }
+  
+  .forgotPassword {
+    margin-top: -10px;
+  }
+  

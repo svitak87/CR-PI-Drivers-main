@@ -4,6 +4,8 @@ import { registerUser } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import validate from "../assets/passwordValidation";
+import style from "./Register.module.css";
+import registerImage from "../assets/fondoRegister.jpg";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const Register = () => {
     password: "",
     passwordTwo: "",
     answerOne: "",
-    answerTwo: ""
+    answerTwo: "",
   });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [passwordValidation, setPasswordValidation] = useState("");
@@ -43,7 +45,7 @@ const Register = () => {
         setPasswordValidation("Passwords do not match");
         setTimeout(() => {
           setUserData({ ...userData, password: "", passwordTwo: "" });
-          setPasswordValidation("")
+          setPasswordValidation("");
         }, 3000);
       }
     } catch (error) {
@@ -57,117 +59,130 @@ const Register = () => {
             password: "",
             passwordTwo: "",
             answerOne: "",
-            answerTwo: ""
+            answerTwo: "",
           });
-          setRegistrationError("")
+          setRegistrationError("");
         }, 4000);
       }
     }
   };
-  
 
   return (
     <div>
-      <h2>Register Now!</h2>
-      <form onSubmit={submitForm}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={userData.name}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="lastname">Lastname:</label>
-          <input
-            type="text"
-            name="lastname"
-            id="lastname"
-            value={userData.lastname}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            value={userData.email}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-          {errors.email && <p>{errors.email}</p>}
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={userData.password}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-          {errors.password && <p>{errors.password}</p>}
-        </div>
-        <div>
-          <label htmlFor="password">Confirm password:</label>
-          <input
-            type="password"
-            name="passwordTwo"
-            id="passwordTwo"
-            value={userData.passwordTwo}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="answerOne">What's your first father name?</label>
-          <input
-            type="text"
-            name="answerOne"
-            id="answerOne"
-            value={userData.answerOne}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="answerTwo">What's your birth date?</label>
-          <p>If your birth date is 02/feb/1990, the answer must be like: "02021990"</p>
-          <input
-            type="text"
-            name="answerTwo"
-            id="answerTwo"
-            value={userData.answerTwo}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-          />
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-        {passwordValidation && <p>{passwordValidation}</p>}
-        {registrationError && <p>{registrationError}</p>}
-        {successAcount && <p>{successAcount}</p>}
-      </form>
-      <p>¿Already registered?</p>
-      <Link to="/login">
-        <p>Login clicking here!</p>
-      </Link>
+      <div className={style.container}>
+        <h2 className={style.registerNow}>¡Register Now!</h2>
+        <form onSubmit={submitForm} className={style.formFilas}>
+          <div>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={userData.name}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="lastname">Lastname:</label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              value={userData.lastname}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={userData.email}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+            {errors.email && <p className={style.error}>{errors.email}</p>}
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={userData.password}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+            {errors.password && (
+              <p className={style.error}>{errors.password}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="password">Confirm password:</label>
+            <input
+              type="password"
+              name="passwordTwo"
+              id="passwordTwo"
+              value={userData.passwordTwo}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="answerOne">What's your first father name?</label>
+            <input
+              type="text"
+              name="answerOne"
+              id="answerOne"
+              value={userData.answerOne}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="answerTwo">What's your birth date?</label>
+            <p className={style.ifYou}>
+              If your birth date is 02/feb/1990, the answer must be like:
+              "02021990"
+            </p>
+            <input
+              type="text"
+              name="answerTwo"
+              id="answerTwo"
+              value={userData.answerTwo}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          {passwordValidation && (
+            <p className={style.passwordValidation}>{passwordValidation}</p>
+          )}
+          {registrationError && (
+            <p className={style.registrationError}>{registrationError}</p>
+          )}
+          {successAcount && <p className={style.success}>{successAcount}</p>}
+          <div>
+            <button type="submit" className={style.submitButton}>
+              Submit
+            </button>
+          </div>
+        </form>
+        <p className={style.alreadyRegister}>¿Already registered?</p>
+        <Link to="/login">
+          <p>Login clicking here!</p>
+        </Link>
+      </div>
+      <img src={registerImage} className={style.registerImage} />
     </div>
   );
 };

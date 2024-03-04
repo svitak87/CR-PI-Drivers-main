@@ -28,7 +28,6 @@ const getDriversQuery = async (query) => {
         through: { attributes: [] }
       }
     ],
-    limit: 15, 
   });
   const transformedDriversDb = driversDb.map(driver => ({
     id: driver.id,
@@ -48,7 +47,6 @@ const getDriversQuery = async (query) => {
         `${driver.name.forename} ${driver.name.surname}`.toLowerCase();
       return fullName.includes(lowercaseQuery);
     })
-    .slice(0, 15);
 
     driversApi.forEach(driverApi => {
       const teams = driverApi.teams ? driverApi.teams.split(", ").map((team) => ({ name: team.trim() })) : [];
@@ -68,7 +66,7 @@ const getDriversQuery = async (query) => {
     if(drivers.length === 0){
       throw new Error("There are no drivers with that query")
     }else{
-      return drivers;
+      return drivers.slice(0, 15);
     }
   } catch (error) {
     throw error;
