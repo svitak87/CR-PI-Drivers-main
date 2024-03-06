@@ -12,7 +12,7 @@
     margin: 0 10px 20px;
     border-radius: 20px;
     overflow: hidden;
-    background: rgb(131, 130, 134);
+    background: #333;
     line-height: 1.5em;
     position: relative;
     z-index: 3;
@@ -23,6 +23,11 @@
     height: 100%;
 }
 
+.cardContainer a {
+    text-decoration: none; 
+    color: inherit; 
+  }
+
 .image {
     width: 300px; 
     height: 300px;
@@ -31,22 +36,24 @@
 }
 
 .name {
-    font-size: 18px;
     text-decoration: none;
-    color: #000;
+    color: white;
     margin: 0 auto; 
     text-align: left; 
     padding: 0 10px; 
     font-weight: bold; 
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .teams {
-    font-size: 15px; 
-    color: #000; 
+    color: white; 
     margin: 0 auto; 
     margin-right: 40px;
     margin-left: 10px;
     margin-top: 0%;
+    text-decoration: none;
 }
 
 

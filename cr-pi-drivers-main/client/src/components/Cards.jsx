@@ -1,19 +1,13 @@
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   nextPage,
   previousPage,
-  filterByTeam,
-  filterDrivers,
-  orderByDate,
-  orderAlphabetic,
 } from "../redux/actions";
 import Card from "./Card";
 import style from "./Cards.module.css";
 
 const Cards = () => {
   const dispatch = useDispatch();
-  const teams = useSelector((state) => state.teams);
   const drivers = useSelector((state) => state.drivers);
   const queryDrivers = useSelector((state) => state.queryDrivers);
   const driversByTeams = useSelector((state) => state.driversByTeams);
@@ -32,38 +26,6 @@ const Cards = () => {
 
   const handlePreviousPage = () => {
     dispatch(previousPage());
-  };
-
-  const handlerFilterTeams = async (event) => {
-    try {
-      await dispatch(filterByTeam(event.target.value));
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const handlerFilterSource = async (event) => {
-    try {
-      await dispatch(filterDrivers(event.target.value));
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const orderDateOfBirth = async (event) => {
-    try {
-      await dispatch(orderByDate(event.target.value));
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const orderAlpha = async (event) => {
-    try {
-      await dispatch(orderAlphabetic(event.target.value));
-    } catch (error) {
-      throw error;
-    }
   };
 
   const totalCards = Array.isArray(drivers) ? [...drivers] : [];
@@ -98,43 +60,6 @@ const Cards = () => {
 
   return (
     <div>
-      <div>
-        <div>
-          <label>Order alphabetic:</label>
-          <select onChange={orderAlpha}>
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
-          </select>
-        </div>
-        <div>
-          <label>Filter drivers</label>
-          <select onChange={handlerFilterSource}>
-            <option value="api">Api</option>
-            <option value="database">Database</option>
-          </select>
-        </div>
-        <div>
-          <label>Order by date of birth</label>
-          <select onChange={orderDateOfBirth}>
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
-          </select>
-        </div>
-        <label>Filter by teams</label>
-        <select
-          multiple
-          id="teams"
-          name="teams"
-          value={teams}
-          onChange={handlerFilterTeams}
-        >
-          {teams.map((team, index) => (
-            <option key={index} value={team.name}>
-              {team.name}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className={style.container}>{renderCards}</div>
       <div className={style.buttons}>
         <button
@@ -149,8 +74,7 @@ const Cards = () => {
           onClick={handleNextPage}
           disabled={
             currentCards.length < driversPerPage ||
-            currentPage === Math.ceil(totalCards.length / driversPerPage) ||
-            totalCards.length < indexOfLastCard + 1
+            currentPage === Math.ceil(totalCards.length / driversPerPage)
           }
         >
           Next page

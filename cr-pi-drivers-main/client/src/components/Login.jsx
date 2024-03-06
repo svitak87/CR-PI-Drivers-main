@@ -59,7 +59,7 @@ const Login = () => {
       setAccess(false);
       setLoginError("Email and password are required");
       setTimeout(() => {
-        setUserCredentials({ ...userCredentials, email: "", password: "" });
+        setUserCredentials({ email: "", password: "" });
         setLoginError("");
       }, 4000);
     }

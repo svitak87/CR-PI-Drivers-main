@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {
-  getAllDrivers 
-} = require("../controllers/getAllDrivers");
+const getAllDrivers = require("../controllers/getAllDrivers");
 
 router.get("/drivers", async (req, res) => {
   try {

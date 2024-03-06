@@ -21,7 +21,6 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING, 
-      defaultValue: "http://localhost:3001/assets/DefaultDriver.png"
     },
     nationality: {
       type: DataTypes.STRING,
@@ -35,3 +34,4 @@ module.exports = (sequelize) => {
     timestamps: false,
   });
 };
+// defaultValue: "http://localhost:3001/assets/DefaultDriver.png"

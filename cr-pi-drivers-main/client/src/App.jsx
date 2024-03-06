@@ -7,6 +7,7 @@ import Forgotpassword from "../src/components/Forgotpassword";
 import Details from "./views/Details/Details";
 import Form from "./views/Form/Form"
 import Footer from '../src/components/Footer'
+import About from '../src/components/About'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/recover" element={<Forgotpassword />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/create" element={<Form />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </>

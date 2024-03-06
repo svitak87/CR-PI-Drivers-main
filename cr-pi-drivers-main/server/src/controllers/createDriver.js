@@ -7,7 +7,7 @@ const createDriver = async (driverData) => {
     if (!name || !lastname || !description || !nationality || !dob || !TeamName) {
       throw new Error("Incomplete data");
     } else {
-      if (!image || !image.startsWith("http")) {
+      if (!image) {
         driverData.image = "http://localhost:3001/assets/DefaultDriver.png";
       }
       

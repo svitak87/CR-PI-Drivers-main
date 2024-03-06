@@ -2,9 +2,26 @@ const validate = (userData) => {
     const errors = {
       email: "",
       password: "",
+      name: "",
+      lastname: "",
     };
-  
-    // Email validation
+    
+    if (!userData.name) {
+      errors.name = "Name input field is empty";
+    } else if (/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s']/g.test(userData.name)) {
+      errors.name = "The name cannot contain symbols and numbers";
+    } else if (userData.name.length > 15) {
+      errors.name = "The name cannot be more than 15 characters long";
+    }
+
+    if (!userData.lastname) {
+      errors.lastname = "Lastname input field is empty";
+    } else if (/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s']/g.test(userData.lastname)) {
+      errors.lastname = "The lastname cannot contain symbols and numbers";
+    } else if (userData.lastname.length > 15) {
+      errors.lastname = "The lastname cannot be more than 15 characters";
+    }
+    
     if (!userData.email) {
       errors.email = "Email input empty";
     } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userData.email)) {

@@ -25,11 +25,13 @@ const Navbar = ({ onSearch }) => {
         <div className={styles.headerContainer}>
           <div className={styles.headerLeft}>
             <div className={styles.headerLogo}>
+              <Link to="/home">
               <img
                 className={styles.logoFormulaUno}
                 src={logoFormulaUno}
                 alt="logoFormulaUno"
               />
+              </Link>
             </div>
             <nav className={styles.leftHeaderNavigation} role="navigation">
               <Link to="/create">
@@ -51,13 +53,17 @@ const Navbar = ({ onSearch }) => {
                   placeholder="Search"
                   onChange={handleChange}
                 />
-                <button type="submit" className={styles.button}>Search</button>
+                <button type="submit" className={styles.button}>
+                  Search
+                </button>
               </form>
             </div>
           </div>
           <div className={styles.headerRight}>
             <nav className={styles.rightHeaderNavigation} role="navigation">
-              <p className={styles.aboutLink}>About</p>
+              <Link to="/about">
+                <p className={styles.aboutLink}>About</p>
+              </Link>
               <Link to="/login">
                 <p className={styles.logOutLink}>Log Out</p>
               </Link>

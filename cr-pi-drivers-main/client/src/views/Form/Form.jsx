@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import validate from "../../assets/formValidation";
 import Navbar from "../../components/Navbar";
+import style from "../Form/Form.module.css";
+import backGroundImage from "../../assets/creationFondo.png"
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -69,7 +71,7 @@ const Form = () => {
           dob: "",
         });
         navigate("/home");
-      }, 4000);
+      }, 5000);
     } catch (error) {
       throw error;
     }
@@ -93,7 +95,8 @@ const Form = () => {
   return (
     <div>
       <Navbar />
-      <h2>Create your personal driver:</h2>
+      <div className={style.container}>
+      <h2 className={style.create}>Create your personal driver:</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">First Name:</label>
@@ -104,7 +107,7 @@ const Form = () => {
             value={driverData.name}
             onChange={handleChange}
           />
-          {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p className={style.error}>{errors.name}</p>}
         </div>
         <div>
           <label htmlFor="lastName">Last Name:</label>
@@ -115,7 +118,7 @@ const Form = () => {
             value={driverData.lastname}
             onChange={handleChange}
           />
-          {errors.lastname && <p>{errors.lastname}</p>}
+          {errors.lastname && <p className={style.error}>{errors.lastname}</p>}
         </div>
         <div>
           <label htmlFor="nationality">Nationality:</label>
@@ -126,7 +129,7 @@ const Form = () => {
             value={driverData.nationality}
             onChange={handleChange}
           />
-          {errors.nationality && <p>{errors.nationality}</p>}
+          {errors.nationality && <p className={style.error}>{errors.nationality}</p>}
         </div>
         <div>
           <label htmlFor="image">Image:</label>
@@ -137,7 +140,7 @@ const Form = () => {
             value={driverData.image}
             onChange={handleChange}
           />
-          {errors.image && <p>{errors.image}</p>}
+          {errors.image && <p className={style.error}>{errors.image}</p>}
         </div>
         <div>
           <label htmlFor="dob">Date of Birth:</label>
@@ -148,19 +151,20 @@ const Form = () => {
             value={driverData.dob}
             onChange={handleChange}
           />
-          {errors.dob && <p>{errors.dob}</p>}
+          {errors.dob && <p className={style.error}>{errors.dob}</p>}
         </div>
         <div>
           <label htmlFor="description">Description:</label>
           <textarea
+            className={style.description}
             id="description"
             name="description"
             value={driverData.description}
             onChange={handleChange}
           />
-          {errors.description && <p>{errors.description}</p>}
+          {errors.description && <p className={style.errorDescription}>{errors.description}</p>}
         </div>
-        <div>
+        <div className={style.teamsContainer}>
           <label htmlFor="teams">Teams:</label>
           <select
             multiple
@@ -176,14 +180,16 @@ const Form = () => {
             ))}
           </select>
         </div>
-        <button type="submit" disabled={disebleButton()}>
+        <button type="submit" className={style.createButton} disabled={disebleButton()}>
           Create Driver
         </button>
       </form>
-      {errorCreation && <p>{errorCreation}</p>}
+      {errorCreation && <p className={style.creationSuccess}>{errorCreation}</p>}
       <Link to="/home">
-        <button>Go Back</button>
+        <button className={style.goBackButton}>Go Back</button>
       </Link>
+      </div>
+      <img src={backGroundImage} className={style.backGroundImage}/>
     </div>
   );
 };

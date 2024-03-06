@@ -1,40 +1,81 @@
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; 
-    margin-top: 50px;
-    margin-right: 100px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-right: 100px;
+  background-color: #333; 
+  padding: 20px; 
+  border-radius: 10px; 
+  margin: 20px;
+  max-height: 120px;
+}
 
- 
-  
-  .buttons {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los botones se envuelvan */
-    margin-right: -10px; /* Ajusta el espacio entre los botones */
-    justify-content: center;
-    max-height: 35px;
-  }
-  
-  .button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 20px; /* Espacio entre los botones */
-    max-width: 500px;
-  }
-  
-  .button:last-child {
-    margin-right: 0; /* Elimina el margen derecho del último botón */
-  }
-  
-  .button:disabled {
-    background-color: #ccc;
-    color: #999;
-    cursor: not-allowed;
-  }
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  margin-right: 5px;
+  margin-left: 15px;
+  margin-top: 30px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  
-  
+
+.orderAlphaContainer,
+.filterSourceContainer,
+.orderDateOfBirthContainer,
+.filterByTeamsContainer {
+  margin-bottom: 20px; 
+}
+
+.orderAlphaContainer label,
+.filterSourceContainer label,
+.orderDateOfBirthContainer label,
+.filterByTeamsContainer label {
+  display: block; 
+  margin-bottom: 5px; 
+  color: white;
+  font-size: 20px;
+}
+
+
+.orderAlphaContainer select,
+.filterSourceContainer select,
+.orderDateOfBirthContainer select,
+.filterByTeamsContainer select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px; 
+  box-sizing: border-box; 
+}
+
+.backGroundImage {
+  max-width: 100%;
+  height: auto;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 70%;
+}
+
+.noDriver {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  position: absolute;
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+  padding: 20px; 
+  border-radius: 10px; 
+  color: red;
+  background-color: #fff; /* Opcional: Agregar un fondo blanco */
+  margin-bottom: 20px;
+}

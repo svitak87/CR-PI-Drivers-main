@@ -98,6 +98,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         driversByTeams: filteredDrivers,
       };
     case ORDER_DRIVERS_API_DOB:
+      console.log(payload)
       let orderedDrivers = [...state.drivers];
       orderedDrivers.sort((a, b) => {
         const dateA = new Date(a.dob).getTime();

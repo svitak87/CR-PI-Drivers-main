@@ -9,15 +9,15 @@ const Card = ({id, name, lastname, image, teams}) => {
   return (
     <div className={style.container}>
       <div className={style.cardContainer}>
-        <Link to={`/details/${id}`}>
           <div className={style.card}>
+          <Link to={`/details/${id}`}>
             <img src={newImage} alt={name} className={style.image} />
             <div className={style.details}>
-              <h2 className={style.name}>{`Name: ${name} ${lastname}`}</h2>
-              <p className={style.teams}>{`Teams: ${teams}`}</p>
+              <p className={style.name}><strong>Name: </strong><span>{name} {lastname}</span></p>
+              <p className={style.teams}><strong>Teams: </strong><span>{teams}</span></p>
             </div>
+            </Link>
           </div>
-        </Link>
       </div>
     </div>
   );

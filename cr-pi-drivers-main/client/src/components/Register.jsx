@@ -19,7 +19,7 @@ const Register = () => {
     answerOne: "",
     answerTwo: "",
   });
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({ email: "", password: "", name: "", lastname: "" });
   const [passwordValidation, setPasswordValidation] = useState("");
   const [registrationError, setRegistrationError] = useState("");
   const [successAcount, setSuccesAcount] = useState("");
@@ -44,7 +44,7 @@ const Register = () => {
       } else {
         setPasswordValidation("Passwords do not match");
         setTimeout(() => {
-          setUserData({ ...userData, password: "", passwordTwo: "" });
+          setUserData({...userData, password: "", passwordTwo: "" });
           setPasswordValidation("");
         }, 3000);
       }
@@ -81,8 +81,8 @@ const Register = () => {
               value={userData.name}
               onChange={handleChange}
               autoComplete="off"
-              required
             />
+            {errors.name && <p className={style.error}>{errors.name}</p>}
           </div>
           <div>
             <label htmlFor="lastname">Lastname:</label>
@@ -93,8 +93,8 @@ const Register = () => {
               value={userData.lastname}
               onChange={handleChange}
               autoComplete="off"
-              required
             />
+            {errors.lastname && <p className={style.error}>{errors.lastname}</p>}
           </div>
           <div>
             <label htmlFor="email">Email:</label>
@@ -105,7 +105,6 @@ const Register = () => {
               value={userData.email}
               onChange={handleChange}
               autoComplete="off"
-              required
             />
             {errors.email && <p className={style.error}>{errors.email}</p>}
           </div>
@@ -118,7 +117,6 @@ const Register = () => {
               value={userData.password}
               onChange={handleChange}
               autoComplete="off"
-              required
             />
             {errors.password && (
               <p className={style.error}>{errors.password}</p>
@@ -133,7 +131,6 @@ const Register = () => {
               value={userData.passwordTwo}
               onChange={handleChange}
               autoComplete="off"
-              required
             />
           </div>
           <div>
@@ -145,7 +142,7 @@ const Register = () => {
               value={userData.answerOne}
               onChange={handleChange}
               autoComplete="off"
-              required
+              
             />
           </div>
           <div>
