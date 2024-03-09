@@ -11,6 +11,7 @@ const Navbar = ({ onSearch }) => {
     setQuery(value);
   };
 
+
   const submitForm = async (event) => {
     event.preventDefault();
     onSearch(query);
@@ -25,13 +26,14 @@ const Navbar = ({ onSearch }) => {
         <div className={styles.headerContainer}>
           <div className={styles.headerLeft}>
             <div className={styles.headerLogo}>
-              <Link to="/home">
-              <img
-                className={styles.logoFormulaUno}
-                src={logoFormulaUno}
-                alt="logoFormulaUno"
-              />
-              </Link>
+                <Link to="/home">
+                  <img
+                    type="submit"
+                    className={styles.logoFormulaUno}
+                    src={logoFormulaUno}
+                    alt="logoFormulaUno"
+                  />
+                </Link>
             </div>
             <nav className={styles.leftHeaderNavigation} role="navigation">
               <Link to="/create">

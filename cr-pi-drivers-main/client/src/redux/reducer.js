@@ -72,6 +72,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         filtrado = state.drivers.filter((driver) => {
           return typeof driver.id === "number";
         });
+        console.log(payload)
       } else if (payload === "database") {
         filtrado = state.drivers.filter((driver) => {
           return typeof driver.id === "string";
@@ -91,6 +92,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         driversByTeams: byTeamDrivers.filter((driver) => {
           return driver.teams.some((team) => team.name === payload);
         }),
+        queryDrivers: [],
       };
 
     case ORDER_DRIVERS_DOB:
