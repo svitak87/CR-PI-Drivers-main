@@ -32,7 +32,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case REGISTER_USER:
       return {
         ...state,
-        users: payload,
+        users: payload
       };
 
     case USER_LOGIN:
@@ -63,7 +63,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case CREATE_DRIVER:
       return {
         ...state,
-        drivers: payload
+        drivers: [...state.drivers, payload]
       };
 
     case FILTER_DRIVERS:

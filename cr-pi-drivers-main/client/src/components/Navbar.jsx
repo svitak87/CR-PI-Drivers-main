@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; 
 import logoFormulaUno from "../assets/logoFormulaUno.png";
 import styles from "../components/Navbar.module.css";
 
@@ -10,7 +10,6 @@ const Navbar = ({ onSearch }) => {
     const { value } = event.target;
     setQuery(value);
   };
-
 
   const submitForm = async (event) => {
     event.preventDefault();
@@ -26,14 +25,13 @@ const Navbar = ({ onSearch }) => {
         <div className={styles.headerContainer}>
           <div className={styles.headerLeft}>
             <div className={styles.headerLogo}>
-                <Link to="/home">
-                  <img
-                    type="submit"
-                    className={styles.logoFormulaUno}
-                    src={logoFormulaUno}
-                    alt="logoFormulaUno"
-                  />
-                </Link>
+              <Link to="/home">
+                <img
+                  className={styles.logoFormulaUno}
+                  src={logoFormulaUno}
+                  alt={logoFormulaUno}
+                />
+              </Link>
             </div>
             <nav className={styles.leftHeaderNavigation} role="navigation">
               <Link to="/create">
@@ -78,3 +76,4 @@ const Navbar = ({ onSearch }) => {
 };
 
 export default Navbar;
+

@@ -112,8 +112,8 @@ const Home = () => {
         <div className={style.orderDateOfBirthContainer}>
           <label>Order by date of birth</label>
           <select onChange={orderDateOfBirth}>
-            <option value="ascending">Ascending 1910-04 / 1990-03 </option>
-            <option value="descending">Descending 1990-03/ 1910-04</option>
+            <option value="ascending">Ascending 1910 - 1990 </option>
+            <option value="descending">Descending 1990 - 1910</option>
           </select>
         </div>
         <div className={style.filterByTeamsContainer}>

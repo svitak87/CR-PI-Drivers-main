@@ -2,9 +2,11 @@ const { Driver, Team } = require("../db");
 const api = require("../../api/db.json");
 const { Op } = require("sequelize");
 
+
 const getDriversQuery = async (query) => {
   const drivers = [];
   try {
+
   const lowercaseQuery = query.toLowerCase();
   const driversDb = await Driver.findAll({
     where: {

@@ -163,47 +163,78 @@ const axios = require('axios');
 //   }
 // }
 
-const pedidoInfo = () => {
-  fetch(`https://jsonplaceholder.typicode.com/users`)
-    .then((response) => {
-      return response.json(); // Devuelve la promesa que se resuelve con los datos
-    })
-    .then((data) => {
-      console.log(data); // Imprime los datos una vez que la promesa se resuelve
-      return data; // Retorna los datos para que puedan ser usados externamente
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
+// const pedidoInfo = () => {
+//   fetch(`https://jsonplaceholder.typicode.com/users`)
+//     .then((response) => {
+//       return response.json(); // Devuelve la promesa que se resuelve con los datos
+//     })
+//     .then((data) => {
+//       console.log(data); // Imprime los datos una vez que la promesa se resuelve
+//       return data; // Retorna los datos para que puedan ser usados externamente
+//     })
+//     .catch((error) => {
+//       console.error('Error:', error);
+//     });
+// }
 
-pedidoInfo();
+// pedidoInfo();
 
+
+// const superPedidoInfo = async () => {
+//   try {
+//     const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
+//     const data = await response.json()
+//     const extractName = data.map((user) => user.name)
+//     const array = [...extractName];
+//     for(const user of extractName){
+//       array.push(user.toLowerCase())
+//     }
+//     console.log(array)
+//     console.log(extractName)
+//   } catch (error) {
+    
+//   }
+// }
+
+// superPedidoInfo()
+
+
+// const miInfo = () => {
+//   return fetch(`https://jsonplaceholder.typicode.com/users`)
+//   .then((response) => response.json())
+//   .then((data) => {
+//     return data
+//   })
+//   .catch((error) => {
+//     console.error(error)
+//   })
+// }
+
+// miInfo().then((data) => {
+//   console.log(data);
+// });
 
 const superPedidoInfo = async () => {
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
-    const data = await response.json()
-    const extractName = data.map((user) => user.name)
-    const array = [...extractName];
-    for(const user of extractName){
-      array.push(user.toLowerCase())
-    }
-    console.log(array)
-    console.log(extractName)
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/users`);
+    const headers = response.data;
+    return headers;
   } catch (error) {
-    
+    console.error(error);
+    throw error; 
   }
 }
 
 superPedidoInfo()
+.then((data) => {
+  console.log(data);
+})
+.catch((error) => {
+  console.error(error);
+});
 
 
 
-// jsonPlaceHolder().then((data) => {
-//   console.log(data); // Aquí puedes acceder a los datos devueltos por la función
-//   const extractId = data.map((user) => user.name)
-//   console.log(extractId)
-// }).catch((error) => {
-//   console.error('Error:', error);
-// });
+
+
+
