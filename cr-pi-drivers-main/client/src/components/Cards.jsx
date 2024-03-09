@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  nextPage,
-  previousPage,
-} from "../redux/actions";
+import { nextPage, previousPage } from "../redux/actions";
 import Card from "./Card";
 import style from "./Cards.module.css";
 
@@ -11,14 +8,10 @@ const Cards = () => {
   const drivers = useSelector((state) => state.drivers);
   const queryDrivers = useSelector((state) => state.queryDrivers);
   const driversByTeams = useSelector((state) => state.driversByTeams);
-  const driversApi = useSelector((state) => state.filterDriversApi);
-  const driversDb = useSelector((state) => state.filterDriversDb);
-  const orderedDateDrivers = useSelector((state) => state.orderDateDrivers);
-  const orderedAlphaDrivers = useSelector((state) => state.orderAlphaDrivers);
+  const filteredDrivers = useSelector((state) => state.filterDrivers);
 
   const currentPage = useSelector((state) => state.currentPage);
   const driversPerPage = useSelector((state) => state.driversPerPage);
-
 
   const handleNextPage = () => {
     dispatch(nextPage());
@@ -37,14 +30,8 @@ const Cards = () => {
       ? queryDrivers.slice(indexOfFirstCard, indexOfLastCard)
       : driversByTeams.length > 0
       ? driversByTeams.slice(indexOfFirstCard, indexOfLastCard)
-      : driversApi.length > 0
-      ? driversApi.slice(indexOfFirstCard, indexOfLastCard)
-      : driversDb.length > 0
-      ? driversDb.slice(indexOfFirstCard, indexOfLastCard)
-      : orderedDateDrivers.length > 0
-      ? orderedDateDrivers.slice(indexOfFirstCard, indexOfLastCard)
-      : orderedAlphaDrivers.length > 0
-      ? orderedAlphaDrivers.slice(indexOfFirstCard, indexOfLastCard)
+      : filteredDrivers.length > 0
+      ? filteredDrivers.slice(indexOfFirstCard, indexOfLastCard)
       : totalCards.slice(indexOfFirstCard, indexOfLastCard);
 
   const renderCards = currentCards.map((driver, index) => (

@@ -21,7 +21,12 @@ const Forgotpassword = () => {
   });
 
   const disableButton = () => {
-    return !userCredentials.email || !userCredentials.password;
+    return (
+      !userCredentials.email ||
+      !userCredentials.password ||
+      !userCredentials.answerOne ||
+      !userCredentials.answerTwo
+    );
   };
 
   const handleChange = (event) => {
@@ -99,7 +104,7 @@ const Forgotpassword = () => {
             autoComplete="off"
           />
           {errors.email && <p className={style.error}>{errors.email}</p>}
-          <label>What's your first father's name?</label>
+          <label>What's your first father's name? 'lowercase format'</label>
           <input
             type="text"
             name="answerOne"

@@ -14,12 +14,12 @@ const About = () => {
           proyecto integrador, indivifual y final; que constituye todos los
           conocimientos básicos y fundamentales para el{" "}
           <strong>Desarrollo web Frontend, Backend y Bases de Datos Full-Stack</strong>, por
-          medio de una familia de librerías de <strong>JavasCript,</strong> ,
+          medio de una familia de librerías de <strong>JavasCript, </strong> 
           que constituyen una verdadera aplicación tipo <strong>PERN</strong>,
           acrónimo que agrupa las tecnologías de:{" "}
-          <strong>Postgres, Express, React y Node.js.</strong>
-          La idea de la aplicación, es que naveguen a través de el mundo
-          deportivo de la Formula 1, y de la misma forma, puedan crear sus
+          <strong>Postgres, Express, React y Node.js. </strong>
+          La idea de la aplicación, es que naveguen a través del mundo
+          deportivo de la Formula 1 y de la misma forma, puedan crear sus
           personajes.
         </p>
         <p className={style.segundoParrafo}>

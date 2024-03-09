@@ -11,8 +11,8 @@ import {
   PREVIOUS_PAGE,
   FILTER_DRIVERS,
   FILTER_BY_TEAM,
-  ORDER_DRIVERS_API_DOB,
-  ORDER_DRIVERS_API_ALPHA,
+  ORDER_DRIVERS_DOB,
+  ORDER_DRIVERS_ALPHA,
 } from "./actions";
 
 const initialState = {
@@ -20,13 +20,11 @@ const initialState = {
   drivers: [],
   queryDrivers: [],
   driversByTeams: [],
-  filterDriversApi: [],
-  filterDriversDb: [],
+  filterDrivers: [],
   teams: [],
   currentPage: 1,
   driversPerPage: 9,
-  orderDateDrivers: [],
-  orderAlphaDrivers: [],
+  message: "",
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -36,6 +34,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         users: payload,
       };
+
     case USER_LOGIN:
       return {
         ...state,
@@ -64,60 +63,126 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case CREATE_DRIVER:
       return {
         ...state,
-        drivers: [...state.drivers, payload],
+        drivers: payload
       };
-    case GET_ALL_TEAMS:
-      return {
-        ...state,
-        teams: [...state.teams, ...payload],
-      };
+
     case FILTER_DRIVERS:
+      let filtrado;
       if (payload === "api") {
-        const apiDrivers = state.drivers.filter((driver) =>
-          Number.isInteger(driver.id)
-        );
-        return {
-          ...state,
-          filterDriversApi: apiDrivers,
-        };
+        filtrado = state.drivers.filter((driver) => {
+          return typeof driver.id === "number";
+        });
       } else if (payload === "database") {
-        const dbDrivers = state.drivers.filter(
-          (driver) => typeof driver.id === "string"
-        );
-        return {
-          ...state,
-          filterDriversDb: dbDrivers,
-        };
+        filtrado = state.drivers.filter((driver) => {
+          return typeof driver.id === "string";
+        });
       }
+      return {
+        ...state,
+        filterDrivers: filtrado,
+        driversByTeams: [],
+        queryDrivers: [],
+      };
+
     case FILTER_BY_TEAM:
-      const filteredDrivers = state.drivers.filter((driver) => {
-        return driver.teams.some((team) => team.name === payload);
-      });
+      const byTeamDrivers = [...state.drivers];
       return {
         ...state,
-        driversByTeams: filteredDrivers,
+        driversByTeams: byTeamDrivers.filter((driver) => {
+          return driver.teams.some((team) => team.name === payload);
+        }),
       };
-    case ORDER_DRIVERS_API_DOB:
-      console.log(payload)
-      let orderedDrivers = [...state.drivers];
-      orderedDrivers.sort((a, b) => {
-        const dateA = new Date(a.dob).getTime();
-        const dateB = new Date(b.dob).getTime();
-        if (payload === "ascending") {
-          return dateA - dateB;
-        } else if (payload === "descending") {
-          return dateB - dateA;
-        }
-        return 0;
-      });
+
+    case ORDER_DRIVERS_DOB:
+      const orderedDrivers = [...state.drivers];
+      const orderedFiltered = [...state.filterDrivers];
+      const orderedByTeams = [...state.driversByTeams];
+      const orderedByQuery = [...state.queryDrivers];
+
       return {
         ...state,
-        orderDateDrivers: orderedDrivers,
+        drivers: orderedDrivers.sort((a, b) => {
+          const dateA = new Date(a.dob).getTime();
+          const dateB = new Date(b.dob).getTime();
+          if (payload === "ascending") {
+            return dateA - dateB;
+          } else if (payload === "descending") {
+            return dateB - dateA;
+          }
+        }),
+        filterDrivers: orderedFiltered.sort((a, b) => {
+          const dateA = new Date(a.dob).getTime();
+          const dateB = new Date(b.dob).getTime();
+          if (payload === "ascending") {
+            return dateA - dateB;
+          } else if (payload === "descending") {
+            return dateB - dateA;
+          }
+        }),
+        driversByTeams: orderedByTeams.sort((a, b) => {
+          const dateA = new Date(a.dob).getTime();
+          const dateB = new Date(b.dob).getTime();
+          if (payload === "ascending") {
+            return dateA - dateB;
+          } else if (payload === "descending") {
+            return dateB - dateA;
+          }
+        }),
+        queryDrivers: orderedByQuery.sort((a, b) => {
+          const dateA = new Date(a.dob).getTime();
+          const dateB = new Date(b.dob).getTime();
+          if (payload === "ascending") {
+            return dateA - dateB;
+          } else if (payload === "descending") {
+            return dateB - dateA;
+          }
+        }),
       };
-    case ORDER_DRIVERS_API_ALPHA:
+
+    case ORDER_DRIVERS_ALPHA:
+      const orderAlpha = [...state.drivers];
+      const orderAlphaFiltered = [...state.filterDrivers];
+      const orderedAlphaByTeam = [...state.driversByTeams];
+      const orderedAlphaQuery = [...state.queryDrivers];
       return {
         ...state,
-        orderAlphaDrivers: state.drivers.slice().sort((a, b) => {
+        drivers: orderAlpha.sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+
+          if (payload === "ascending") {
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+          } else if (payload === "descending") {
+            if (nameA < nameB) return 1;
+            if (nameA > nameB) return -1;
+          }
+        }),
+        filterDrivers: orderAlphaFiltered.sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+
+          if (payload === "ascending") {
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+          } else if (payload === "descending") {
+            if (nameA < nameB) return 1;
+            if (nameA > nameB) return -1;
+          }
+        }),
+        driversByTeams: orderedAlphaByTeam.sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+
+          if (payload === "ascending") {
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+          } else if (payload === "descending") {
+            if (nameA < nameB) return 1;
+            if (nameA > nameB) return -1;
+          }
+        }),
+        queryDrivers: orderedAlphaQuery.sort((a, b) => {
           const nameA = a.name.toLowerCase();
           const nameB = b.name.toLowerCase();
 
@@ -130,6 +195,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
           }
         }),
       };
+    case GET_ALL_TEAMS:
+      return {
+        ...state,
+        teams: payload,
+      };
+
     case NEXT_PAGE:
       return {
         ...state,
@@ -141,7 +212,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         currentPage: payload,
       };
     default:
-      return state;
+      return { ...state };
   }
 };
 

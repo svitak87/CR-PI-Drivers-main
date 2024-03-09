@@ -10,8 +10,8 @@ export const NEXT_PAGE = "NEXT_PAGE";
 export const PREVIOUS_PAGE = "PREVIOUS_PAGE";
 export const FILTER_DRIVERS = "FILTER_DRIVERS";
 export const FILTER_BY_TEAM = "FILTER_BY_TEAM";
-export const ORDER_DRIVERS_API_DOB = "ORDER_DRIVERS_API_DOB";
-export const ORDER_DRIVERS_API_ALPHA = "ORDER_DRIVERS_API_ALPHA";
+export const ORDER_DRIVERS_DOB = "ORDER_DRIVERS_DOB";
+export const ORDER_DRIVERS_ALPHA = "ORDER_DRIVERS_ALPHA";
 
 import axios from "axios";
 
@@ -169,11 +169,11 @@ export const filterByTeam = (team) => {
 };
 
 export const orderByDate = (order) => {
-  return { type: ORDER_DRIVERS_API_DOB, payload: order };
+  return { type: ORDER_DRIVERS_DOB, payload: order };
 };
 
 export const orderAlphabetic = (order) => {
-  return { type: ORDER_DRIVERS_API_ALPHA, payload: order };
+  return { type: ORDER_DRIVERS_ALPHA, payload: order };
 };
 
 export const nextPage = () => {

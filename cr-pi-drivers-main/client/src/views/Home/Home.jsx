@@ -18,16 +18,18 @@ const Home = () => {
   const dispatch = useDispatch();
   const [noDriver, setNoDriver] = useState("");
   const teams = useSelector((state) => state.teams);
+  const message = useSelector((state) => state.message)
+
 
   useEffect(() => {
     dispatch(getAllTeams());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(getAllDrivers());
-  }, [dispatch]);
+  }, []);
 
-  const handleSearch = (query) => {
+  const handleSearch = (query) => { 
     const obtainDriver = async () => {
       try {
         await dispatch(findByName(query));
@@ -60,15 +62,15 @@ const Home = () => {
   };
   const handlerFilterSource = async (event) => {
     try {
-      await dispatch(filterDrivers(event.target.value));
+        await dispatch(filterDrivers(event.target.value))
     } catch (error) {
-      throw error;
+        throw error;
     }
-  };
+};
+
 
   const orderDateOfBirth = async (event) => {
     try {
-      console.log(event.target.value);
       await dispatch(orderByDate(event.target.value));
     } catch (error) {
       throw error;
@@ -96,22 +98,22 @@ const Home = () => {
         <div className={style.orderAlphaContainer}>
           <label>Order alphabetic:</label>
           <select onChange={orderAlpha}>
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
+            <option value="ascending">Ascending A-Z</option>
+            <option value="descending">Descending Z-A</option>
           </select>
         </div>
         <div className={style.filterSourceContainer}>
           <label>Filter drivers</label>
           <select onChange={handlerFilterSource}>
-            <option value="api">Api</option>
             <option value="database">Database</option>
+            <option value="api">Api</option>
           </select>
         </div>
         <div className={style.orderDateOfBirthContainer}>
           <label>Order by date of birth</label>
           <select onChange={orderDateOfBirth}>
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
+            <option value="ascending">Ascending 1910-04 / 1990-03 </option>
+            <option value="descending">Descending 1990-03/ 1910-04</option>
           </select>
         </div>
         <div className={style.filterByTeamsContainer}>
@@ -132,6 +134,7 @@ const Home = () => {
         </div>
       </div>
       <div className={style.noDriverContainter}>{noDriver && <h1 className={style.noDriver}>{noDriver}</h1>}</div>
+      <div className={style.messageContainer}>{message && <h1 className={style.message}>{message}</h1>}</div>
       <Cards />
       <img src={backGroundImage} className={style.backGroundImage}/>
     </div>

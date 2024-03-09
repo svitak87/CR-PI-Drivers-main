@@ -2,13 +2,15 @@ const {User} = require('../../db')
 const bcrypt = require('bcrypt');
 
 const registrateUser = async (userData) => {
-  const { name, lastname, email, password, answerOne, answerTwo } = userData;
+  let { name, lastname, email, password, answerOne, answerTwo } = userData;
   try {
     if (name && lastname && email && password && answerOne && answerTwo) {
       const existingUser = await User.findOne({where: {email: email}})
       if(existingUser){
         throw new Error("User already exists");
       }
+      answerOne = answerOne.toLowerCase();
+      console.log(answerOne)
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = await User.create({ name, lastname, email, password: hashedPassword, answerOne, answerTwo });
       return newUser;

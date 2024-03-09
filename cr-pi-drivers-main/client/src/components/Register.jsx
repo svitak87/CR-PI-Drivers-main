@@ -19,10 +19,27 @@ const Register = () => {
     answerOne: "",
     answerTwo: "",
   });
-  const [errors, setErrors] = useState({ email: "", password: "", name: "", lastname: "" });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    name: "",
+    lastname: "",
+  });
   const [passwordValidation, setPasswordValidation] = useState("");
   const [registrationError, setRegistrationError] = useState("");
   const [successAcount, setSuccesAcount] = useState("");
+
+  const disableButton = () => {
+    return (
+      !userData.name ||
+      !userData.lastname ||
+      !userData.email ||
+      !userData.password ||
+      !userData.passwordTwo ||
+      !userData.answerOne ||
+      !userData.answerTwo
+    );
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,7 +61,7 @@ const Register = () => {
       } else {
         setPasswordValidation("Passwords do not match");
         setTimeout(() => {
-          setUserData({...userData, password: "", passwordTwo: "" });
+          setUserData({ ...userData, password: "", passwordTwo: "" });
           setPasswordValidation("");
         }, 3000);
       }
@@ -94,7 +111,9 @@ const Register = () => {
               onChange={handleChange}
               autoComplete="off"
             />
-            {errors.lastname && <p className={style.error}>{errors.lastname}</p>}
+            {errors.lastname && (
+              <p className={style.error}>{errors.lastname}</p>
+            )}
           </div>
           <div>
             <label htmlFor="email">Email:</label>
@@ -142,7 +161,6 @@ const Register = () => {
               value={userData.answerOne}
               onChange={handleChange}
               autoComplete="off"
-              
             />
           </div>
           <div>
@@ -158,7 +176,6 @@ const Register = () => {
               value={userData.answerTwo}
               onChange={handleChange}
               autoComplete="off"
-              required
             />
           </div>
           {passwordValidation && (
@@ -169,7 +186,7 @@ const Register = () => {
           )}
           {successAcount && <p className={style.success}>{successAcount}</p>}
           <div>
-            <button type="submit" className={style.submitButton}>
+            <button type="submit" disabled={disableButton()} className={style.submitButton}>
               Submit
             </button>
           </div>

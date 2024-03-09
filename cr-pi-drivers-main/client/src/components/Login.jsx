@@ -55,14 +55,7 @@ const Login = () => {
           }, 4000);
         }
       }
-    } else {
-      setAccess(false);
-      setLoginError("Email and password are required");
-      setTimeout(() => {
-        setUserCredentials({ email: "", password: "" });
-        setLoginError("");
-      }, 4000);
-    }
+    } 
   };
 
   return (

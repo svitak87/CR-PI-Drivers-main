@@ -67,15 +67,30 @@
 
 .noDriver {
   display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
+  justify-content: center; 
+  align-items: center; 
   position: absolute;
-  top: 50%; /* Centrar verticalmente */
-  left: 50%; /* Centrar horizontalmente */
-  transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
   padding: 20px; 
   border-radius: 10px; 
   color: red;
-  background-color: #fff; /* Opcional: Agregar un fondo blanco */
+  background-color: #fff; 
+  margin-bottom: 20px;
+}
+
+.message {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  padding: 20px; 
+  border-radius: 10px; 
+  color: red;
+  background-color: #fff; 
   margin-bottom: 20px;
 }

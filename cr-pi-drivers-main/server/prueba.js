@@ -105,10 +105,12 @@ const drivers = [
 ];
 
 const investigation = (array) => {
-   const drivers = []
+  const drivers = [];
   for (let i = 0; i < array.length; i++) {
-    const teams = array[i].teams.split(', ').map(team => ({name: team.trim()}));
-    
+    const teams = array[i].teams
+      .split(", ")
+      .map((team) => ({ name: team.trim() }));
+
     const driver = {
       id: array[i].id,
       name: array[i].name.forename,
@@ -116,11 +118,92 @@ const investigation = (array) => {
       image: array[i].image.url,
       dob: array[i].dob,
       nationality: array[i].nationality,
-      teams: teams
+      teams: teams,
     };
-    drivers.push(driver)
+    drivers.push(driver);
   }
-  return drivers
+  return drivers;
 };
 
 console.log(investigation(drivers));
+
+const driver = [
+  { name: "oscar", dob: "2004-12-31" },
+  { name: "gina", dob: "1990-07-08" },
+  { name: 'javier', dob: '1960-12-01'},
+  { name: 'javier', dob: '1789-12-01'},
+];
+
+
+const miFuncion = (array) => {
+  const orden = [...array];
+  return orden.sort((a, b) => {
+    const dateA = new Date(a.dob); // Fecha de nacimiento del primer conductor
+    const dateB = new Date(b.dob); // Fecha de nacimiento del segundo conductor
+    return dateA - dateB; // Ordena de menor a mayor
+  });
+};
+
+console.log(miFuncion(driver));
+const arrayZapa = ['oscar', 'gina', 'leonor', ' javier']
+console.log(arrayZapa.sort())
+
+console.log(driver.sort())
+
+const axios = require('axios');
+
+// const jsonPlaceHolder = async () => {
+//   try {
+//     const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+//     const data = await response.json();
+//     console.log(data)
+//   } catch (error) {
+//     console.error('Error:', error);
+//     throw error;
+//   }
+// }
+
+const pedidoInfo = () => {
+  fetch(`https://jsonplaceholder.typicode.com/users`)
+    .then((response) => {
+      return response.json(); // Devuelve la promesa que se resuelve con los datos
+    })
+    .then((data) => {
+      console.log(data); // Imprime los datos una vez que la promesa se resuelve
+      return data; // Retorna los datos para que puedan ser usados externamente
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+pedidoInfo();
+
+
+const superPedidoInfo = async () => {
+  try {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
+    const data = await response.json()
+    const extractName = data.map((user) => user.name)
+    const array = [...extractName];
+    for(const user of extractName){
+      array.push(user.toLowerCase())
+    }
+    console.log(array)
+    console.log(extractName)
+  } catch (error) {
+    
+  }
+}
+
+superPedidoInfo()
+
+
+
+// jsonPlaceHolder().then((data) => {
+//   console.log(data); // Aquí puedes acceder a los datos devueltos por la función
+//   const extractId = data.map((user) => user.name)
+//   console.log(extractId)
+// }).catch((error) => {
+//   console.error('Error:', error);
+// });

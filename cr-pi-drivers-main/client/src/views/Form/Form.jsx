@@ -49,7 +49,7 @@ const Form = () => {
         selectedTeams.push(options[i].value);
       }
     }
-    setDriverData((prevState) => ({
+    setDriverData((prevState) =>  ({
       ...prevState,
       TeamName: [...selectedTeams],
     }));
@@ -81,16 +81,25 @@ const Form = () => {
     dispatch(getAllTeams());
   }, [dispatch]);
 
-  const disebleButton = () => {
-    return (
+  const disableButton = () => {
+
+    const fieldEmpty =
       driverData.TeamName.length === 0 ||
       !driverData.name ||
       !driverData.lastname ||
       !driverData.description ||
       !driverData.nationality ||
-      !driverData.dob
-    );
+      !driverData.dob;
+  
+    
+    const hasErrors = Object.keys(errors)
+    .filter(key => key !== 'image') 
+    .some(key => errors[key]);
+  
+    
+    return fieldEmpty || hasErrors;
   };
+  
 
   return (
     <div>
@@ -180,7 +189,7 @@ const Form = () => {
             ))}
           </select>
         </div>
-        <button type="submit" className={style.createButton} disabled={disebleButton()}>
+        <button type="submit" className={style.createButton} disabled={disableButton()}>
           Create Driver
         </button>
       </form>

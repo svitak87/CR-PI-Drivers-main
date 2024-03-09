@@ -21,7 +21,9 @@ const getAllTeams = async () => {
         }
       }
     }
-    const teams = await Team.findAll();
+    const teams = await Team.findAll({
+      order: [["name", "ASC"]]
+    });
     if(teams.length === 0){
       throw new Error("There are no teams for a while");
     }
