@@ -7,7 +7,7 @@ router.put("/recover", async (req, res) => {
   const { answerOne, answerTwo, email, password } = req.body;
   try {
     await forgotPassword({ answerOne, answerTwo, email, password });
-    res.status(200).json({message: "Password succesfully updated"})
+    res.status(201).json({message: "Password succesfully updated"})
   } catch (error) {
     if (error.message === "Incorrect answers") {
       res.status(403).json({ error: error.message });

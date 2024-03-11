@@ -49,11 +49,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         drivers: payload,
+        
       };
     case FIND_BY_NAME:
       return {
         ...state,
         queryDrivers: payload,
+        currentPage: 1
+        
       };
     case GET_DRIVER_DETAIL:
       return {
@@ -72,7 +75,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         filtrado = state.drivers.filter((driver) => {
           return typeof driver.id === "number";
         });
-        console.log(payload)
       } else if (payload === "database") {
         filtrado = state.drivers.filter((driver) => {
           return typeof driver.id === "string";
@@ -83,6 +85,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         filterDrivers: filtrado,
         driversByTeams: [],
         queryDrivers: [],
+        currentPage: 1
       };
 
     case FILTER_BY_TEAM:
@@ -93,6 +96,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return driver.teams.some((team) => team.name === payload);
         }),
         queryDrivers: [],
+        currentPage: 1
       };
 
     case ORDER_DRIVERS_DOB:
@@ -139,6 +143,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return dateB - dateA;
           }
         }),
+        currentPage: 1
       };
 
     case ORDER_DRIVERS_ALPHA:
@@ -196,6 +201,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             if (nameA > nameB) return -1;
           }
         }),
+        currentPage: 1
       };
     case GET_ALL_TEAMS:
       return {

@@ -47,6 +47,25 @@ const Cards = () => {
 
   return (
     <div>
+     <div className={style.buttons}>
+        <button
+          className={style.button}
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+        >
+          Previous page
+        </button>
+        <button
+          className={style.button}
+          onClick={handleNextPage}
+          disabled={
+            currentCards.length < driversPerPage ||
+            currentPage === Math.ceil(totalCards.length / driversPerPage)
+          }
+        >
+          Next page
+        </button>
+      </div>
       <div className={style.container}>{renderCards}</div>
       <div className={style.buttons}>
         <button
