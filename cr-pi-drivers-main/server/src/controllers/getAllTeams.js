@@ -1,32 +1,30 @@
 const { Team } = require("../db");
-const api = require("../../api/db.json");
+const axios = require("axios");
 
 const getAllTeams = async () => {
   try {
     const teamsCount = await Team.count();
 
     if (teamsCount === 0) {
-      for (const driver of api.drivers) {
-        if (driver.teams !== undefined) {
-          const teams = driver.teams.split(",");
+      const response = await axios.get(`http://localhost:5000/drivers`);
+      const drivers = await response.data;
 
-          for (const teamName of teams) {
-            const name = teamName.trim();
+      for (const driver of drivers) {
+        const teams = driver.teams ? driver.teams.split(", ") : [];
 
-            const existingTeam = await Team.findOne({ where: { name } });
-            if (!existingTeam) {
-              await Team.create({ name });
-            }
+        for (const teamName of teams) {
+          const name = teamName.trim();
+
+          const existingTeam = await Team.findOne({ where: { name } });
+
+          if (!existingTeam) {
+            await Team.create({ name });
           }
         }
       }
     }
-    const teams = await Team.findAll({
-      order: [["name", "ASC"]]
-    });
-    if(teams.length === 0){
-      throw new Error("There are no teams for a while");
-    }
+    const teams = await Team.findAll({ order: [["name", "ASC"]] });
+
     return teams;
   } catch (error) {
     throw error;
@@ -34,6 +32,3 @@ const getAllTeams = async () => {
 };
 
 module.exports = getAllTeams;
-
-
-

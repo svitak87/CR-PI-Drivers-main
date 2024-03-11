@@ -11,11 +11,13 @@ const createDriver = async (driverData) => {
         driverData.image = "http://localhost:3001/assets/DefaultDriver.png";
       }
       
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-      lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1);
+      name = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1)
+      lastname = lastname.charAt(0).toUpperCase() + lastname.toLowerCase().slice(1)
+      nationality = nationality.charAt(0).toUpperCase() + nationality.toLowerCase().slice(1)
 
       driverData.name = name;
       driverData.lastname = lastname;
+      driverData.nationality = nationality;
 
       const driverCreated = await Driver.create(driverData);
 

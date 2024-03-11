@@ -34,4 +34,3 @@ module.exports = (sequelize) => {
     timestamps: false,
   });
 };
-// defaultValue: "http://localhost:3001/assets/DefaultDriver.png"
