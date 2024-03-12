@@ -91,24 +91,28 @@ const rootReducer = (state = initialState, { type, payload }) => {
         drivers: [...state.drivers, payload],
       };
 
-    case FILTER_DRIVERS:
-      let filtrado;
-      if (payload === "api") {
-        filtrado = state.drivers.filter((driver) => {
-          return typeof driver.id === "number";
-        });
-      } else if (payload === "database") {
-        filtrado = state.drivers.filter((driver) => {
-          return typeof driver.id === "string";
-        });
-      }
-      return {
-        ...state,
-        currentPage: 1,
-        filterDrivers: filtrado,
-        driversByTeams: [],
-        queryDrivers: [],
-      };
+      case FILTER_DRIVERS:
+        let filtrado;
+      
+        if (payload === "api") {
+          filtrado = state.drivers.filter((driver) => {
+            return typeof driver.id === "number";
+          });
+        } else if (payload === "database") {
+          filtrado = state.drivers.filter((driver) => {
+            return typeof driver.id === "string";
+          });
+          console.log(state.drivers)
+        }
+      
+        return {
+          ...state,
+          currentPage: 1,
+          filterDrivers: filtrado,
+          driversByTeams: [],
+          queryDrivers: [],
+        };
+      
 
     case FILTER_BY_TEAM:
       const byTeamDrivers = [...state.drivers];

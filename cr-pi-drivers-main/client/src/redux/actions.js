@@ -4,7 +4,7 @@ export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const GET_ALL_DRIVERS = "GET_ALL_DRIVERS";
 export const FIND_BY_NAME = "FIND_BY_NAME";
 export const GET_DRIVER_DETAIL = "GET_DRIVER_DETAIL";
-export const DELETE_DRIVER = "DELETE_DRIVER"
+export const DELETE_DRIVER = "DELETE_DRIVER";
 export const CREATE_DRIVER = "CREATE_DRIVER";
 export const GET_ALL_TEAMS = "GET_ALL_TEAMS";
 export const NEXT_PAGE = "NEXT_PAGE";
@@ -57,7 +57,6 @@ export const userLogin = (credentialData) => {
     }
   };
 };
-
 
 export const recoverPassword = (userCredentials) => {
   return async (dispatch) => {
@@ -131,17 +130,19 @@ export const getDriverDetail = (id) => {
 export const deleteDriver = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/drivers/${id}`)
-      const data = response.data
+      const response = await axios.delete(
+        `http://localhost:3001/drivers/${id}`
+      );
+      const data = response.data;
 
       dispatch({ type: DELETE_DRIVER, payload: data });
     } catch (error) {
-      if(error.response && error.response.status === 500){
+      if (error.response && error.response.status === 500) {
         return { error: error.response };
       }
     }
-  }
-}
+  };
+};
 
 export const createDriver = (driverData) => {
   return async (dispatch) => {

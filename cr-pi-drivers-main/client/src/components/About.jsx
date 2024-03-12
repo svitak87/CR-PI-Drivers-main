@@ -25,7 +25,7 @@ const About = () => {
         <p className={style.segundoParrafo}>
           Sobre mí, soy <strong>Óscar Fajardo</strong>, estudiante del bootcamp{" "}
           <strong>Full Stack Web Develoment</strong>, de{" "}
-          <strong>soyHenry</strong>. A través de este nuevo camino que inicio en
+          <strong>Henry</strong>. A través de este nuevo camino que inicio en
           el mundo de la programación, esta App; Drivers, es mi primer
           proyecto y contiene todos los conocimientos que me ha brindado
           soyHenry, en su inversión en mi educación; por supuesto.

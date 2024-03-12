@@ -433,8 +433,20 @@ const letraRepetida = (oracion, caracter) => {
 console.log(letraRepetida(texto, "a"));
 
 const numeros = [1, -10, 86, 4, 12, 200];
-const numerosDos = [50, 3, 70, 7, 10];
 
+const elimanrNumero = (array, valor) => {
+  const resultado = array.includes(valor) 
+
+  if (resultado) {
+  return array.filter((numero) => numero !== valor)
+  }else{
+    return 'numero no existe'
+  }
+};
+
+console.log(elimanrNumero(numeros, 2000));
+
+const numerosDos = [50, 3, 70, 7, 10];
 const concatOrdenarArrays = (arrayUno, arrayDos) => {
   const arrayGlobal = [...arrayUno, ...arrayDos];
 
@@ -460,3 +472,30 @@ const posicionMayorMenor = (array) => {
   return arrayMayorMenor;
 };
 console.log(posicionMayorMenor(numeros));
+
+
+
+const traerId = () => {
+  return fetch(`https://jsonplaceholder.typicode.com/users`) 
+  .then(response => response.json())
+  .then(users => {
+    return users
+  }).catch(error => {
+    throw error
+  })
+}
+
+traerId()
+  .then((users) => {
+    console.log(users)
+    const usersPares = []
+    for(const user of users){
+      if(user.id % 2 === 0){
+        usersPares.push(user)
+      }
+    }
+    console.log(usersPares)
+  })
+  .catch((error)=> {
+    console.log(error)
+  })

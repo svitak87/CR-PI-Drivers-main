@@ -19,7 +19,6 @@ const Home = () => {
   const [noDriver, setNoDriver] = useState("");
   const teams = useSelector((state) => state.teams);
 
-
   useEffect(() => {
     dispatch(getAllTeams());
   }, []);
@@ -60,12 +59,11 @@ const Home = () => {
   };
   const handlerFilterSource = async (event) => {
     try {
-        await dispatch(filterDrivers(event.target.value))
+      await dispatch(filterDrivers(event.target.value));
     } catch (error) {
-        throw error;
+      throw error;
     }
-};
-
+  };
 
   const orderDateOfBirth = async (event) => {
     try {
