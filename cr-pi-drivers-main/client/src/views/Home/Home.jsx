@@ -18,7 +18,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const [noDriver, setNoDriver] = useState("");
   const teams = useSelector((state) => state.teams);
-  const message = useSelector((state) => state.message)
 
 
   useEffect(() => {
@@ -39,7 +38,6 @@ const Home = () => {
           setTimeout(() => {
             setNoDriver("");
           }, 4000);
-          throw { error: error.message };
         }
       }
     };
@@ -134,7 +132,6 @@ const Home = () => {
         </div>
       </div>
       <div className={style.noDriverContainter}>{noDriver && <h1 className={style.noDriver}>{noDriver}</h1>}</div>
-      <div className={style.messageContainer}>{message && <h1 className={style.message}>{message}</h1>}</div>
       <Cards />
       <img src={backGroundImage} className={style.backGroundImage}/>
     </div>

@@ -24,7 +24,6 @@ const initialState = {
   teams: [],
   currentPage: 1,
   driversPerPage: 9,
-  message: "",
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -82,10 +81,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       }
       return {
         ...state,
+        currentPage: 1,
         filterDrivers: filtrado,
         driversByTeams: [],
         queryDrivers: [],
-        currentPage: 1
       };
 
     case FILTER_BY_TEAM:
@@ -143,7 +142,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return dateB - dateA;
           }
         }),
-        currentPage: 1
+        currentPage: 1,
       };
 
     case ORDER_DRIVERS_ALPHA:
@@ -153,6 +152,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       const orderedAlphaQuery = [...state.queryDrivers];
       return {
         ...state,
+        currentPage: 1,
         drivers: orderAlpha.sort((a, b) => {
           const nameA = a.name.toLowerCase();
           const nameB = b.name.toLowerCase();
@@ -201,7 +201,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
             if (nameA > nameB) return -1;
           }
         }),
-        currentPage: 1
       };
     case GET_ALL_TEAMS:
       return {

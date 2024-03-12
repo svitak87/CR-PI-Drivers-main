@@ -14,7 +14,6 @@ router.post("/register", async (req, res) => {
     } else if (error.message === "Incomplete data") {
       res.status(400).json({ error: error.message });
     } else {
-      console.error(error.message)
       res.status(500).json({ error: "Internal server error" });
     }
   }

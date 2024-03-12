@@ -1,5 +1,4 @@
 const { Driver, Team } = require("../db");
-const api = require("../../api/db.json");
 const axios = require('axios')
 
 const getAllDrivers = async () => {

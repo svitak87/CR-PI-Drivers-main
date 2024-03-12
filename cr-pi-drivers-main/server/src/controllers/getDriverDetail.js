@@ -3,10 +3,9 @@ const api = require("../../api/db.json");
 
 const getDriverDetail = async (id) => {
   try {
-    const stringId = String(id);
 
     const driverApiFound = api.drivers.find(
-      (driver) => String(driver.id) === stringId
+      (driver) => String(driver.id) === id
     );
 
     if (driverApiFound) {
@@ -27,7 +26,7 @@ const getDriverDetail = async (id) => {
       };
       return driverApi;
     }
-    const driverDbFound = await Driver.findByPk(stringId, {
+    const driverDbFound = await Driver.findByPk(id, {
       include: {
         model: Team,
         attributes: ["name"],

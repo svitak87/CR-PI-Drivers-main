@@ -307,103 +307,156 @@
 //     console.log(error);
 //   });
 
-const numeros = [23, 45, 85, 63];
+// const numeros = [23, 45, 85, 63];
 
-const sumarNumeros = (array) => {
-  let total = 0;
-  for (const numero of array) {
-    total += numero;
-  }
-  console.log(total);
-};
+// const sumarNumeros = (array) => {
+//   let total = 0;
+//   for (const numero of array) {
+//     total += numero;
+//   }
+//   console.log(total);
+// };
 
-const numeroMasGrande = (array) => {
-  let masGrande = 0;
+// const numeroMasGrande = (array) => {
+//   let masGrande = 0;
 
-  for (const numero of array) {
-    if (numero > masGrande) {
-      masGrande = numero;
-    }
-  }
-  console.log(masGrande);
-};
+//   for (const numero of array) {
+//     if (numero > masGrande) {
+//       masGrande = numero;
+//     }
+//   }
+//   console.log(masGrande);
+// };
 
-const palabra = "televisor";
+// const palabra = "televisor";
 
-const numeroDeVocales = (string) => {
-  const arrayLetras = string.split("");
+// const numeroDeVocales = (string) => {
+//   const arrayLetras = string.split("");
+//   let contador = 0;
+//   for (const letra of arrayLetras) {
+//     if (
+//       letra === "a" ||
+//       letra === "e" ||
+//       letra === "i" ||
+//       letra === "o" ||
+//       letra === "u"
+//     ) {
+//       contador++;
+//     }
+//   }
+//   console.log(contador);
+// };
+
+// const invertirCadena = (string) => {
+//   const palabraInvertida = string.split("").reverse().join("");
+//   console.log(palabraInvertida);
+// };
+
+// const arrayDuplicados = ["televisor", "lapiz", "televisor", "taza", "vaso"];
+
+// const eliminarDuplicados = (array) => {
+//   const sinDuplicar = Array.from(new Set(array));
+//   console.log(sinDuplicar);
+// };
+
+// const drivers = [
+//   { name: "oscar", dob: "2004-12-31" },
+//   { name: "gina", dob: "1990-07-08" },
+//   { name: "javier", dob: "1960-12-01" },
+//   { name: "javier", dob: "1789-12-01" },
+// ];
+
+// const ordenarPorDob = (array) => {
+//   const orden = [...array];
+//   orden.sort((a, b) => {
+//     const dateA = new Date(a.dob);
+//     const dateB = new Date(b.dob);
+//     return dateA - dateB;
+//   });
+//   console.log(orden);
+// };
+
+// const validNumber = 1123160753;
+// const invalidNuber = "12362&&";
+// const telefonoValido = (telefono) => {
+//   if (Number.isInteger(telefono)) {
+//     console.log(true);
+//   } else {
+//     console.log(false);
+//   }
+// };
+
+// const texto = "Estos ejercicios cubren una variedad de temas comunes en JavaScript, como trabajar con arrays, cadenas de texto, objetos y lógica de programación."
+
+// const existePalabra = (string, localizePalabra) => {
+//   const arrayPalabras = string.split(' ')
+//   for(let i = 0 ; i < arrayPalabras.length ; i++){
+//     if(arrayPalabras[i] === localizePalabra){
+//       return true
+//     }
+//   }
+//   return false
+// }
+
+// sumarNumeros(numeros);
+// numeroMasGrande(numeros);
+// numeroDeVocales(palabra);
+// invertirCadena(palabra);
+// eliminarDuplicados(arrayDuplicados);
+// ordenarPorDob(drivers);
+// telefonoValido(invalidNuber)
+// existePalabra(texto)
+// console.log(existePalabra(texto, 'ejercicios'))
+
+const texto = "hola, alejandro, como, vas";
+const nuevoString = texto
+  .trim()
+  .split(", ")
+  .map((palabra) => ({
+    palabra: palabra.charAt(0).toUpperCase() + palabra.slice(1),
+  }));
+console.log(nuevoString);
+
+const letraRepetida = (oracion, caracter) => {
   let contador = 0;
-  for (const letra of arrayLetras) {
-    if (
-      letra === "a" ||
-      letra === "e" ||
-      letra === "i" ||
-      letra === "o" ||
-      letra === "u"
-    ) {
+  for (const letra of oracion) {
+    if (letra === caracter) {
       contador++;
     }
   }
-  console.log(contador);
-};
-
-const invertirCadena = (string) => {
-  const palabraInvertida = string.split("").reverse().join("");
-  console.log(palabraInvertida);
-};
-
-const arrayDuplicados = ["televisor", "lapiz", "televisor", "taza", "vaso"];
-
-const eliminarDuplicados = (array) => {
-  const sinDuplicar = Array.from(new Set(array));
-  console.log(sinDuplicar);
-};
-
-const drivers = [
-  { name: "oscar", dob: "2004-12-31" },
-  { name: "gina", dob: "1990-07-08" },
-  { name: "javier", dob: "1960-12-01" },
-  { name: "javier", dob: "1789-12-01" },
-];
-
-const ordenarPorDob = (array) => {
-  const orden = [...array];
-  orden.sort((a, b) => {
-    const dateA = new Date(a.dob);
-    const dateB = new Date(b.dob);
-    return dateA - dateB;
-  });
-  console.log(orden);
-};
-
-const validNumber = 1123160753;
-const invalidNuber = "12362&&";
-const telefonoValido = (telefono) => {
-  if (Number.isInteger(telefono)) {
-    console.log(true);
+  if (contador === 0) {
+    return "la letra no existe";
   } else {
-    console.log(false);
+    return contador;
   }
 };
+console.log(letraRepetida(texto, "a"));
 
-const texto = "Estos ejercicios cubren una variedad de temas comunes en JavaScript, como trabajar con arrays, cadenas de texto, objetos y lógica de programación."
+const numeros = [1, -10, 86, 4, 12, 200];
+const numerosDos = [50, 3, 70, 7, 10];
 
-const existePalabra = (string, localizePalabra) => {
-  const arrayPalabras = string.split(' ')
-  for(let i = 0 ; i < arrayPalabras.length ; i++){
-    if(arrayPalabras[i] === localizePalabra){
-      return true
+const concatOrdenarArrays = (arrayUno, arrayDos) => {
+  const arrayGlobal = [...arrayUno, ...arrayDos];
+
+  arrayGlobal.sort((a, b) => a - b);
+
+  return arrayGlobal;
+};
+
+console.log(concatOrdenarArrays(numeros, numerosDos));
+
+const posicionMayorMenor = (array) => {
+  const arrayMayorMenor = [];
+  let mayor = array[0];
+  let menor = array[0];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > mayor) {
+      mayor = array[i];
+    } else if (array[i] < menor) {
+      menor = array[i];
     }
   }
-  return false
-}
-
-sumarNumeros(numeros);
-numeroMasGrande(numeros);
-numeroDeVocales(palabra);
-invertirCadena(palabra);
-eliminarDuplicados(arrayDuplicados);
-ordenarPorDob(drivers);
-telefonoValido(invalidNuber)
-existePalabra(texto)
-console.log(existePalabra(texto, 'ejercicios'))
+  arrayMayorMenor.push(mayor, menor);
+  return arrayMayorMenor;
+};
+console.log(posicionMayorMenor(numeros));
