@@ -5,6 +5,7 @@ import {
   GET_ALL_DRIVERS,
   FIND_BY_NAME,
   GET_DRIVER_DETAIL,
+  DELETE_DRIVER,
   CREATE_DRIVER,
   GET_ALL_TEAMS,
   NEXT_PAGE,
@@ -31,7 +32,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case REGISTER_USER:
       return {
         ...state,
-        users: payload
+        users: payload,
       };
 
     case USER_LOGIN:
@@ -48,24 +49,46 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         drivers: payload,
-        
       };
     case FIND_BY_NAME:
       return {
         ...state,
         queryDrivers: payload,
-        currentPage: 1
-        
+        currentPage: 1,
       };
     case GET_DRIVER_DETAIL:
       return {
         ...state,
         drivers: payload,
       };
+    case DELETE_DRIVER:
+      const updatedDrivers = state.drivers.filter((driver) => {
+        return String(driver.id) !== payload;
+      });
+          
+      const updateOnFilter = state.filterDrivers.filter((driver) => {
+        return String(driver.id) !== payload
+      })
+
+      const updatedOnTeams = state.driversByTeams.filter((driver) => {
+        return String(driver.id) !== payload
+      })
+
+      const updatedOnQuery = state.queryDrivers.filter((driver) => {
+        return String(driver.id) !== payload
+      })
+      return {
+        ...state,
+        drivers: updatedDrivers,
+        filterDrivers: updateOnFilter,
+        driversByTeams: updatedOnTeams,
+        queryDrivers: updatedOnQuery,
+      };
+
     case CREATE_DRIVER:
       return {
         ...state,
-        drivers: [...state.drivers, payload]
+        drivers: [...state.drivers, payload],
       };
 
     case FILTER_DRIVERS:
@@ -95,7 +118,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return driver.teams.some((team) => team.name === payload);
         }),
         queryDrivers: [],
-        currentPage: 1
+        currentPage: 1,
       };
 
     case ORDER_DRIVERS_DOB:

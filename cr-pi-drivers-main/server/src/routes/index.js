@@ -7,12 +7,14 @@ const getAllDriversRoute = require('./getAllDriversRoute');
 const getAllTeamsRoute = require('../routes/getAllTeamsRoute');
 const createDriverRoute = require('../routes/createDriverRoute');
 const getDriversQuery = require('../routes/getDriversQueryRoute');
+const deleteDriverRoute = require('../routes/deleteDriverRoute')
 
 router.use(getAllDriversRoute);
 router.use(getAllTeamsRoute);
 router.use(createDriverRoute);
 router.use(getDriversQuery);
 router.use(getDriverDetailRoute);
+router.use(deleteDriverRoute);
 
 
 //Users routes:

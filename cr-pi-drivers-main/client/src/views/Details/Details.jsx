@@ -18,7 +18,7 @@ const Details = () => {
       : defaultImage;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
         await dispatch(getDriverDetail(id));
       } catch (error) {
@@ -26,7 +26,7 @@ const Details = () => {
       }
     };
 
-    fetchData();
+    getData();
   }, [dispatch, id]);
 
   return (
